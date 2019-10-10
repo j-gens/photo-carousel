@@ -1,0 +1,36 @@
+{
+  "name": "photo-carousel",
+  "version": "1.0.0",
+  "description": "Recreate the movie photos carousel",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js",
+    "build": "webpack -d",
+    "seed": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrr41-FEC-krillin/photo-carousel.git"
+  },
+  "author": "j-gens",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.4",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.3",
+    "@babel/core": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  }
+}
