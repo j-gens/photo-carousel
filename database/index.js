@@ -13,7 +13,6 @@ let Carousel = mongoose.model('Carousel', carouselSchema);
 
 
 const save = (data, callback) => {
-
   for (let i = 0; i < data.length; i++) {
     let newImg = new Carousel ({
       _id: data[i]._id,
@@ -21,7 +20,6 @@ const save = (data, callback) => {
       large_url: data[i].large_url,
       movie: {id: data[i].movie.id, title: data[i].movie.title}
     })
-
     newImg.save((err, data) => {
       if (err) {
         callback(err);
@@ -32,5 +30,15 @@ const save = (data, callback) => {
   }
 };
 
+const getCarousel = (req, res) => {
+  Carousel.find({ 'movie.id': req.params.movieId }, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(results);
+    }
+  });
+}
 
 module.exports.save = save;
+module.exports.getCarousel = getCarousel;
