@@ -6,13 +6,7 @@ app.use(express.static('public'));
 
 
 app.get('/api/:movieId/imgs', (req, res) => {
-  db.Carousel.find({ 'movie.id': req.params.movieId }, (err, results) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(results);
-    }
-  });
+  db.getCarousel(req, res);
 });
 
 
