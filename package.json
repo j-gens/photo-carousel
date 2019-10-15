@@ -20,7 +20,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.7.4",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.3",
