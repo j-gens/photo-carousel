@@ -31,6 +31,7 @@
     "enzyme": "^3.10.0",
     "eslint": "^6.5.1",
     "eslint-config-hackreactor": "github:hackreactor-labs/eslint-config-hackreactor",
+    "eslint-plugin-react": "^7.16.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.3",
     "webpack": "^4.41.0",
