@@ -27,7 +27,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-
+    //for testing purposes
   }
 
   //will be used to get both thumbnails and large images
