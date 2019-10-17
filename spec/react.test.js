@@ -1,43 +1,33 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import NavigationEntry from '../client/components/navigationEntry.jsx';
-import App from '../client/app.jsx';
+import { configure, shallow, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import sinon from 'sinon';
+// import sinon from 'sinon';
+import toJson from 'enzyme-to-json';
+
+import axios from 'axios';
+import App from '../client/app.jsx';
 
 configure({adapter: new Adapter()})
 
-describe('NavigationEntry component', () => {
-
-  // it('should render in debug mode', () => {
-  //   const component = shallow(<NavigationEntry debug />)
-  //   expect(component).toMatchSnapshot();
-  // })
-
-  // it('renders only one red navigation dot', () => {
-  //   const wrapper = shallow(<NavigationEntry />);
-  //   expect(wrapper.find({prop: 'index'}).to.have.lengthOf(1));
-  // })
-
-
-})
-
-
+jest.mock('axios');
 
 describe('App component', () => {
 
-  it('should render in debug mode', async () => {
-    const component = shallow(<App />, {disableLifecycleMethods: true})
+  it('renders without crashing given the required props', () => {
+    const props = {
+      currentMovie: '',
+      carousel: [],
+      carouselByFours: [],
+      currentFour: [],
+      currentIndex: 0
+    }
+    const images = [{_id: 1, small_url: 'https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/small0.jpg', movie: {id: 21210, title: 'Detective Pikachu'}}];
+    const resp = {data: images};
+    axios.get.mockResolvedValue(resp);
 
-    expect(component).toMatchSnapshot();
+    const wrapper = shallow(<App {...props} />)
+    expect(toJson(wrapper)).toMatchSnapshot()
   })
-
-  it('simulates click events', () => {
-    const handleClick = sinon.spy();
-    const wrapper = shallow(<App />, {disableLifecycleMethods: true});
-    wrapper.find('div.CarouselButtonRight').simulate('click');
-    expect(handleClick).to.have.property('callCount', 1);
-  });
 
 })
 
