@@ -26,6 +26,10 @@ class App extends React.Component {
     this.fetch('imgsmall', 21211);
   }
 
+  componentWillUnmount() {
+
+  }
+
   //will be used to get both thumbnails and large images
   fetch(url, params) {
     axios.get(`/api/${url}/${params}`)
@@ -33,12 +37,12 @@ class App extends React.Component {
       console.log(response);
       this.setState({carousel: response.data})
     })
-    .catch(error => {
-      console.log(error);
-    })
     .finally(() => {
       this.setState({currentMovie: this.state.carousel[0].movie.title});
       this.groupImagesByFours(this.state.carousel);
+    })
+    .catch(error => {
+      console.log(error);
     })
   }
 
