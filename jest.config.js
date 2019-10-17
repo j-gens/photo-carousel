@@ -1,4 +1,7 @@
 module.exports = {
   verbose: true,
-  testEnvironment: "node"
+  testEnvironment: "node",
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ]
 }
