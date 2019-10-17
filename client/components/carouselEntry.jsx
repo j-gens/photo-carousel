@@ -1,10 +1,8 @@
 import React from 'react';
-import Modal from 'react-modal';
 import axios from 'axios';
 import { CarouselEntryWrapper, CarouselEntryImg } from './stylesheet.jsx';
+import {Modal, Button} from 'react-bootstrap';
 
-
-Modal.setAppElement('#imgcarousel');
 
 class CarouselEntry extends React.Component {
   constructor(props) {
@@ -18,10 +16,8 @@ class CarouselEntry extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.findThePhoto = this.findThePhoto.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
-
 
   handleClick() {
     this.setState({clickedPhoto: this.props.entry._id});
@@ -33,7 +29,7 @@ class CarouselEntry extends React.Component {
     })
     .finally(() => {
       this.findThePhoto();
-      this.openModal();
+      this.toggleModal();
     })
     .catch(error => {
       console.log(error);
@@ -48,12 +44,8 @@ class CarouselEntry extends React.Component {
     }
   }
 
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
+  toggleModal() {
+    this.setState({modalIsOpen: !this.state.modalIsOpen});
   }
 
   render() {
@@ -61,17 +53,22 @@ class CarouselEntry extends React.Component {
 
     if (this.state.modalIsOpen) {
       modalDisplay = (
-        <Modal
-        isOpen={this.state.modalIsOpen}
-        onRequestClose={this.closeModal}
-        contentLabel="image carousel modal">
-          <div>
-            <button onClick={this.closeModal}> X </button>
-          </div>
-          <div>
-            <img src={this.state.currentPhoto}></img>
-          </div>
-       </Modal>
+        <>
+          <Modal show={this.state.modalIsOpen} onHide={this.toggleModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.toggleModal}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={this.toggleModal}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
       )
     }
 
