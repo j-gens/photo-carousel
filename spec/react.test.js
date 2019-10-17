@@ -33,6 +33,8 @@ describe('App component', () => {
     const resp = {data: images};
     axios.get.mockResolvedValue(resp);
 
+    expect(resp.data).toEqual(images);
+
     expect(axios.get).toHaveBeenCalledTimes(1);
   })
 
