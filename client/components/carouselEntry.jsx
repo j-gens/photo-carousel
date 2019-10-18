@@ -1,7 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { CarouselEntryWrapper, CarouselEntryImg } from './stylesheet.jsx';
-import {Modal, Button} from 'react-bootstrap';
+import { CarouselEntryWrapper, CarouselEntryImg, ModalButtonRight, ModalButtonLeft, ModalBin, ModalImage, Modal, ModalHeader } from './stylesheet.jsx';
 
 
 class CarouselEntry extends React.Component {
@@ -52,23 +52,35 @@ class CarouselEntry extends React.Component {
     let modalDisplay;
 
     if (this.state.modalIsOpen) {
+
+      return ReactDOM.createPortal(
+        ( <>
+            <Modal>
+                <ModalHeader>
+                  <button onClick={this.toggleModal}> X </button>
+                </ModalHeader>
+                <ModalBin>
+                  <ModalButtonLeft value="<">{'<'}</ModalButtonLeft>
+                  <ModalImage src={this.state.currentPhoto}></ModalImage>
+                  <ModalButtonRight value=">">{'>'}</ModalButtonRight>
+                </ModalBin>
+            </Modal>
+          </> ), document.getElementById('imgmodal'))
+
+
       modalDisplay = (
         <>
-          <Modal show={this.state.modalIsOpen} onHide={this.toggleModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.toggleModal}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={this.toggleModal}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
+        <Modal>
+            <div>
+              <button onClick={this.toggleModal}> X </button>
+            </div>
+            <ModalBin>
+              <ModalButtonLeft value="<">{'<'}</ModalButtonLeft>
+              <ModalImage src={this.state.currentPhoto}></ModalImage>
+              <ModalButtonRight value=">">{'>'}</ModalButtonRight>
+            </ModalBin>
+        </Modal>
+      </>
       )
     }
 
