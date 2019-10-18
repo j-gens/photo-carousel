@@ -148,8 +148,16 @@ export const Modal = styled.div`
 
 export const ModalHeader = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  flex-wrap: nowrap;
   margin: 10px;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const ModalCount = styled.div`
+  color: white;
+  font-size: 10px;
 `;
 
 export const ModalXButton = styled(Button)`
