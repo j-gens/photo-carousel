@@ -119,7 +119,7 @@ class App extends React.Component {
         </CarouselHeaderWrapper>
         <CarouselBinWrapper>
           <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
-          <Carousel carousel={this.state.currentFour} />
+          <Carousel carousel={this.state.currentFour} length={this.state.carousel.length} />
           <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
         </CarouselBinWrapper>
         <CarouselViewAllWrapper>
