@@ -5,8 +5,8 @@ import { CarouselLineWrapper } from './stylesheet.jsx';
 
 const Carousel = (props) => (
   <CarouselLineWrapper>
-    {props.carousel.map((entry, index) =>
-      <CarouselEntry entry={entry} index={index} />
+    {props.carousel.map((entry) =>
+      <CarouselEntry entry={entry} />
     )}
   </CarouselLineWrapper>
 )
