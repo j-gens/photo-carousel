@@ -134,26 +134,6 @@ export const CarouselEntryImg = styled.img`
 `;
 
 
-export const ModalButtonLeft = styled(Button)`
-  color: white;
-  background-color: black;
-`;
-
-export const ModalButtonRight = styled(Button)`
-  color: white;
-  background-color: black;
-`;
-
-export const ModalBin = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const ModalImage = styled.img`
-  max-width: 80%;
-  max-height: auto;
-`;
-
 export const Modal = styled.div`
   z-index: 1070;
   background-color: black;
@@ -163,9 +143,40 @@ export const Modal = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
 `;
 
 export const ModalHeader = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 10px;
+`;
 
+export const ModalXButton = styled(Button)`
+  color: white;
+  background-color: black;
+`;
+
+export const ModalBin = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+export const ModalImage = styled.img`
+  max-width: 80%;
+  max-height: auto;
+`;
+
+export const ModalButtonLeft = styled(Button)`
+  color: white;
+  background-color: black;
+`;
+
+export const ModalButtonRight = styled(Button)`
+  color: white;
+  background-color: black;
 `;
 
