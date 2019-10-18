@@ -89,7 +89,7 @@ export const CarouselViewAllLink = styled.a`
 export const CarouselLineWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;;
+  justify-content: space-evenly;
 
   z-index: 1;
   grid-column-start: 1;
@@ -131,5 +131,41 @@ export const CarouselEntryImg = styled.img`
     transform: scale(1.1);
     transition: transform .15s ease-in-out;
   }
+`;
+
+
+export const ModalButtonLeft = styled(Button)`
+  color: white;
+  background-color: black;
+`;
+
+export const ModalButtonRight = styled(Button)`
+  color: white;
+  background-color: black;
+`;
+
+export const ModalBin = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const ModalImage = styled.img`
+  max-width: 80%;
+  max-height: auto;
+`;
+
+export const Modal = styled.div`
+  z-index: 1070;
+  background-color: black;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ModalHeader = styled.div`
+
 `;
 
