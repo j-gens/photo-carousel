@@ -14,7 +14,9 @@ class App extends React.Component {
       carouselByFours: [],
       currentFour: [],
       currentIndex: 0,
-      animate: ''
+      animate: '',
+      leadingFour: [],
+      laggingFour: []
     }
 
     this.fetch = this.fetch.bind(this);
@@ -54,9 +56,12 @@ class App extends React.Component {
     var count = carousel.length;
     var selectedFour = [];
     var allGroupsOfFour = [];
+
+    var lagFour = [];
+    var leadFour = [];
+
     var genericImage= {"_id": "placeholder",
       "small_url": "https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/ph-thumb.gif"};
-
     if (carousel.length < 4) {
       selectedFour = carousel.slice();
       while (selectedFour.length < 4) {
@@ -75,8 +80,18 @@ class App extends React.Component {
       i = i + 4;
     }
 
+    if (allGroupsOfFour.length === 1) {
+      lagFour.push(selectedFour);
+      leadFour.push(selectedFour);
+    } else {
+      lagFour.push(allGroupsOfFour[allGroupsOfFour.length - 1]);
+      leadFour.push(allGroupsOfFour[1]);
+    }
+
     this.setState({carouselByFours: allGroupsOfFour,
-      currentFour: allGroupsOfFour[0]});
+      currentFour: allGroupsOfFour[0],
+      laggingFour: lagFour,
+      leadingFour: leadFour});
   }
 
   //change currentFour displayed (cycle through carousel)
@@ -125,7 +140,7 @@ class App extends React.Component {
         <CarouselBinWrapper>
           <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
           <Carousel carousel={this.state.currentFour} length={this.state.carousel.length}
-          animate={this.state.animate} />
+          animate={this.state.animate} lead={this.state.leadingFour} lag={this.state.laggingFour} />
           <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
         </CarouselBinWrapper>
         <CarouselViewAllWrapper>
