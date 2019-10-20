@@ -188,7 +188,7 @@ export const ModalButtonRight = styled(Button)`
 `;
 
 
-const Movemento = keyframes`
+const MovementoRight = keyframes`
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 `;
@@ -198,5 +198,18 @@ export const CarouselMoveRight = styled.div`
   max-height: 167px;
   max-width: 167px;
   overflow: hidden;
-  animation: ${Movemento} 3s linear infinite;
+  animation: ${MovementoRight} 1s linear infinite;
+`;
+
+const MovementoLeft = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+`;
+
+export const CarouselMoveLeft = styled.div`
+  z-index: 2;
+  max-height: 167px;
+  max-width: 167px;
+  overflow: hidden;
+  animation: ${MovementoLeft} 1s linear infinite;
 `;
