@@ -16,11 +16,14 @@ class App extends React.Component {
       currentIndex: 0,
       animate: '',
       leadingFour: [],
-      laggingFour: []
+      leader: {},
+      laggingFour: [],
+      lagger: {}
     }
 
     this.fetch = this.fetch.bind(this);
     this.groupImagesByFours = this.groupImagesByFours.bind(this);
+    this.leadingOrLagging = this.leadingOrLagging.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -81,17 +84,51 @@ class App extends React.Component {
     }
 
     if (allGroupsOfFour.length === 1) {
-      lagFour.push(selectedFour);
-      leadFour.push(selectedFour);
+      lagFour = allGroupsOfFour[0];
+      leadFour = allGroupsOfFour[0];
     } else {
-      lagFour.push(allGroupsOfFour[allGroupsOfFour.length - 1]);
-      leadFour.push(allGroupsOfFour[1]);
+      lagFour = allGroupsOfFour[allGroupsOfFour.length - 1];
+      leadFour = allGroupsOfFour[1];
     }
 
     this.setState({carouselByFours: allGroupsOfFour,
       currentFour: allGroupsOfFour[0],
       laggingFour: lagFour,
-      leadingFour: leadFour});
+      leadingFour: leadFour,
+      lagger: lagFour[3],
+      leader: leadFour[0]});
+
+  }
+
+  leadingOrLagging(index) {
+    var maxLength = this.state.carouselByFours.length - 1;
+    var upIndex = this.state.currentIndex + 1;
+    var downIndex = this.state.currentIndex - 1;
+
+    if (index === maxLength) {
+      this.setState({leadingFour: this.state.carouselByFours[0],
+      leader: this.state.leadingFour[0]});
+      if (this.state.carouselByFours[downIndex]) {
+        this.setState({laggingFour: this.state.carouselByFours[downIndex],
+        lagger: this.state.laggingFour[3]});
+      }
+    } else if (index === 0) {
+      this.setState({laggingFour: this.state.carouselByFours[maxLength],
+      lagger: this.state.laggingFour[3]});
+      if (this.state.carouselByFours[upIndex]) {
+        this.setState({leadingFour: this.state.carouselByFours[upIndex],
+        leader: this.state.leadingFour[0]});
+      }
+    } else {
+      if (this.state.carouselByFours[upIndex]) {
+        this.setState({leadingFour: this.state.carouselByFours[upIndex],
+        leader: this.state.leadingFour[0]});
+      }
+      if (this.state.carouselByFours[downIndex]) {
+        this.setState({laggingFour: this.state.carouselByFours[downIndex],
+        lagger: this.state.laggingFour[3]});
+      }
+    }
   }
 
   //change currentFour displayed (cycle through carousel)
@@ -104,7 +141,7 @@ class App extends React.Component {
       if (this.state.currentIndex === maxLength) {
         this.setState({animate: 'right'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[0],
-          currentIndex: 0, animate: ''})}, 250);
+          currentIndex: 0, animate: ''})}, 250)
       } else {
         this.setState({animate: 'right'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[upIndex],
@@ -118,10 +155,10 @@ class App extends React.Component {
           currentIndex: maxLength, animate: ''})}, 250);
       } else {
         this.setState({animate: 'left'});
-        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex],
-          currentIndex: downIndex, animate: ''})}, 250);
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex], currentIndex: downIndex, animate: ''})}, 250);
       }
     }
+    this.leadingOrLagging(this.state.currentIndex);
   }
 
   render() {
@@ -139,8 +176,11 @@ class App extends React.Component {
         </CarouselHeaderWrapper>
         <CarouselBinWrapper>
           <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
-          <Carousel carousel={this.state.currentFour} length={this.state.carousel.length}
-          animate={this.state.animate} lead={this.state.leadingFour} lag={this.state.laggingFour} />
+          <Carousel carousel={this.state.currentFour}
+          length={this.state.carousel.length}
+          animate={this.state.animate}
+          leader={this.state.leader}
+          lagger={this.state.lagger} />
           <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
         </CarouselBinWrapper>
         <CarouselViewAllWrapper>
