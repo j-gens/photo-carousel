@@ -90,6 +90,7 @@ export const CarouselLineWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  overflow: hidden;
 
   z-index: 1;
   grid-column-start: 1;
@@ -189,8 +190,8 @@ export const ModalButtonRight = styled(Button)`
 
 
 const MovementoRight = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { transform: translateX(0px); }
+  to { transform: translateX(167px); }
 `;
 
 export const CarouselMoveRight = styled.div`
@@ -198,12 +199,12 @@ export const CarouselMoveRight = styled.div`
   max-height: 167px;
   max-width: 167px;
   overflow: hidden;
-  animation: ${MovementoRight} 1s linear infinite;
+  animation: ${MovementoRight} 0.25s ease-in-out infinite;
 `;
 
 const MovementoLeft = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from { transform: translateX(0px); }
+  to { transform: translateX(-167px); }
 `;
 
 export const CarouselMoveLeft = styled.div`
@@ -211,5 +212,5 @@ export const CarouselMoveLeft = styled.div`
   max-height: 167px;
   max-width: 167px;
   overflow: hidden;
-  animation: ${MovementoLeft} 1s linear infinite;
+  animation: ${MovementoLeft} 0.25s ease-in-out infinite;
 `;

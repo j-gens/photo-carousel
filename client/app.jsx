@@ -89,22 +89,22 @@ class App extends React.Component {
       if (this.state.currentIndex === maxLength) {
         this.setState({animate: 'right'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[0],
-          currentIndex: 0, animate: ''})}, 1000);
+          currentIndex: 0, animate: ''})}, 250);
       } else {
         this.setState({animate: 'right'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[upIndex],
-          currentIndex: upIndex, animate: ''})}, 1000);
+          currentIndex: upIndex, animate: ''})}, 250);
       }
     }
     if (event.target.value === '<') {
       if (this.state.currentIndex === 0) {
         this.setState({animate: 'left'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[maxLength],
-          currentIndex: maxLength, animate: ''})}, 1000);
+          currentIndex: maxLength, animate: ''})}, 250);
       } else {
         this.setState({animate: 'left'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex],
-          currentIndex: downIndex, animate: ''})}, 1000);
+          currentIndex: downIndex, animate: ''})}, 250);
       }
     }
   }
