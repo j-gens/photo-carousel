@@ -14,7 +14,7 @@ class App extends React.Component {
       carouselByFours: [],
       currentFour: [],
       currentIndex: 0,
-      animate: false
+      animate: ''
     }
 
     this.fetch = this.fetch.bind(this);
@@ -87,22 +87,24 @@ class App extends React.Component {
 
     if (event.target.value === '>') {
       if (this.state.currentIndex === maxLength) {
-        this.setState({currentFour: this.state.carouselByFours[0],
-          currentIndex: 0});
+        this.setState({animate: 'right'});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[0],
+          currentIndex: 0, animate: ''})}, 1000);
       } else {
-        this.setState({currentFour: this.state.carouselByFours[upIndex],
-          currentIndex: upIndex});
+        this.setState({animate: 'right'});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[upIndex],
+          currentIndex: upIndex, animate: ''})}, 1000);
       }
     }
     if (event.target.value === '<') {
       if (this.state.currentIndex === 0) {
-        this.setState({animate: true});
+        this.setState({animate: 'left'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[maxLength],
-          currentIndex: maxLength, animate: false})}, 3000);
+          currentIndex: maxLength, animate: ''})}, 1000);
       } else {
-        this.setState({animate: true});
+        this.setState({animate: 'left'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex],
-          currentIndex: downIndex, animate: false})}, 3000);
+          currentIndex: downIndex, animate: ''})}, 1000);
       }
     }
   }
