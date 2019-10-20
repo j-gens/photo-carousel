@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 
 export const CarouselBodyWrapper = styled.div`
@@ -133,7 +133,6 @@ export const CarouselEntryImg = styled.img`
   }
 `;
 
-
 export const Modal = styled.div`
   z-index: 1070;
   background-color: black;
@@ -188,3 +187,16 @@ export const ModalButtonRight = styled(Button)`
   background-color: black;
 `;
 
+
+const Movemento = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
+export const CarouselMoveRight = styled.div`
+  z-index: 2;
+  max-height: 167px;
+  max-width: 167px;
+  overflow: hidden;
+  animation: ${Movemento} 3s linear infinite;
+`;

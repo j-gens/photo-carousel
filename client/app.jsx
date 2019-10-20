@@ -13,7 +13,8 @@ class App extends React.Component {
       carousel: [],
       carouselByFours: [],
       currentFour: [],
-      currentIndex: 0
+      currentIndex: 0,
+      animate: false
     }
 
     this.fetch = this.fetch.bind(this);
@@ -87,19 +88,21 @@ class App extends React.Component {
     if (event.target.value === '>') {
       if (this.state.currentIndex === maxLength) {
         this.setState({currentFour: this.state.carouselByFours[0],
-          currentIndex: 0})
+          currentIndex: 0});
       } else {
         this.setState({currentFour: this.state.carouselByFours[upIndex],
-          currentIndex: upIndex})
+          currentIndex: upIndex});
       }
     }
     if (event.target.value === '<') {
       if (this.state.currentIndex === 0) {
-        this.setState({currentFour: this.state.carouselByFours[maxLength],
-          currentIndex: maxLength})
+        this.setState({animate: true});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[maxLength],
+          currentIndex: maxLength, animate: false})}, 3000);
       } else {
-        this.setState({currentFour: this.state.carouselByFours[downIndex],
-          currentIndex: downIndex})
+        this.setState({animate: true});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex],
+          currentIndex: downIndex, animate: false})}, 3000);
       }
     }
   }
@@ -119,7 +122,8 @@ class App extends React.Component {
         </CarouselHeaderWrapper>
         <CarouselBinWrapper>
           <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
-          <Carousel carousel={this.state.currentFour} length={this.state.carousel.length} />
+          <Carousel carousel={this.state.currentFour} length={this.state.carousel.length}
+          animate={this.state.animate} />
           <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
         </CarouselBinWrapper>
         <CarouselViewAllWrapper>
