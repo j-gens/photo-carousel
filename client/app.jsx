@@ -16,9 +16,7 @@ class App extends React.Component {
       currentIndex: 0,
       animate: '',
       leadingFour: [],
-      leader: {},
-      laggingFour: [],
-      lagger: {}
+      laggingFour: []
     }
 
     this.fetch = this.fetch.bind(this);
@@ -94,9 +92,7 @@ class App extends React.Component {
     this.setState({carouselByFours: allGroupsOfFour,
       currentFour: allGroupsOfFour[0],
       laggingFour: lagFour,
-      leadingFour: leadFour,
-      lagger: lagFour[3],
-      leader: leadFour[0]});
+      leadingFour: leadFour});
 
   }
 
@@ -106,27 +102,21 @@ class App extends React.Component {
     var downIndex = this.state.currentIndex - 1;
 
     if (index === maxLength) {
-      this.setState({leadingFour: this.state.carouselByFours[0],
-      leader: this.state.leadingFour[0]});
+      this.setState({leadingFour: this.state.carouselByFours[0]});
       if (this.state.carouselByFours[downIndex]) {
-        this.setState({laggingFour: this.state.carouselByFours[downIndex],
-        lagger: this.state.laggingFour[3]});
+        this.setState({laggingFour: this.state.carouselByFours[downIndex]});
       }
     } else if (index === 0) {
-      this.setState({laggingFour: this.state.carouselByFours[maxLength],
-      lagger: this.state.laggingFour[3]});
+      this.setState({laggingFour: this.state.carouselByFours[maxLength]});
       if (this.state.carouselByFours[upIndex]) {
-        this.setState({leadingFour: this.state.carouselByFours[upIndex],
-        leader: this.state.leadingFour[0]});
+        this.setState({leadingFour: this.state.carouselByFours[upIndex]});
       }
     } else {
       if (this.state.carouselByFours[upIndex]) {
-        this.setState({leadingFour: this.state.carouselByFours[upIndex],
-        leader: this.state.leadingFour[0]});
+        this.setState({leadingFour: this.state.carouselByFours[upIndex]});
       }
       if (this.state.carouselByFours[downIndex]) {
-        this.setState({laggingFour: this.state.carouselByFours[downIndex],
-        lagger: this.state.laggingFour[3]});
+        this.setState({laggingFour: this.state.carouselByFours[downIndex]});
       }
     }
   }
