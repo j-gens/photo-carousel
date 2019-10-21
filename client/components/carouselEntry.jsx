@@ -97,21 +97,24 @@ class CarouselEntry extends React.Component {
     if (this.props.animate === 'right') {
       return (
         <CarouselMoveRight>
-          <CarouselEntryImg src={this.props.entry.small_url} alt={this.props.entry._id} >
+          <CarouselEntryImg src={this.props.entry.small_url}
+          alt={this.props.entry._id} >
           </CarouselEntryImg>
         </CarouselMoveRight>
       );
     } else if (this.props.animate === 'left') {
       return (
         <CarouselMoveLeft>
-          <CarouselEntryImg src={this.props.entry.small_url} alt={this.props.entry._id} >
+          <CarouselEntryImg src={this.props.entry.small_url}
+          alt={this.props.entry._id} >
           </CarouselEntryImg>
         </CarouselMoveLeft>
       );
     } else {
       return (
         <CarouselEntryWrapper>
-          <CarouselEntryImg src={this.props.entry.small_url} alt={this.props.entry._id} onClick={this.handleClick}>
+          <CarouselEntryImg src={this.props.entry.small_url}
+          alt={this.props.entry._id} onClick={this.handleClick}>
           </CarouselEntryImg>
         </CarouselEntryWrapper>
       );

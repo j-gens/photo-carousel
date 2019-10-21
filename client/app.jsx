@@ -141,21 +141,21 @@ class App extends React.Component {
       if (this.state.currentIndex === maxLength) {
         this.setState({animate: 'right'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[0],
-          currentIndex: 0, animate: ''})}, 250)
+          currentIndex: 0, animate: ''})}, 200)
       } else {
         this.setState({animate: 'right'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[upIndex],
-          currentIndex: upIndex, animate: ''})}, 250);
+          currentIndex: upIndex, animate: ''})}, 200);
       }
     }
     if (event.target.value === '<') {
       if (this.state.currentIndex === 0) {
         this.setState({animate: 'left'});
         setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[maxLength],
-          currentIndex: maxLength, animate: ''})}, 250);
+          currentIndex: maxLength, animate: ''})}, 200);
       } else {
         this.setState({animate: 'left'});
-        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex], currentIndex: downIndex, animate: ''})}, 250);
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex], currentIndex: downIndex, animate: ''})}, 200);
       }
     }
     this.leadingOrLagging(this.state.currentIndex);
@@ -179,8 +179,8 @@ class App extends React.Component {
           <Carousel carousel={this.state.currentFour}
           length={this.state.carousel.length}
           animate={this.state.animate}
-          leader={this.state.leader}
-          lagger={this.state.lagger} />
+          leader={this.state.leadingFour}
+          lagger={this.state.laggingFour} />
           <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
         </CarouselBinWrapper>
         <CarouselViewAllWrapper>
