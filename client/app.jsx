@@ -120,6 +120,7 @@ class App extends React.Component {
         this.setState({laggingFour: this.state.carouselByFours[downIndex]});
       }
     }
+
   }
 
   //change currentFour displayed (cycle through carousel)

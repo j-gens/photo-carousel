@@ -181,7 +181,6 @@ export const ModalBin = styled.div`
 
 export const ModalImage = styled.img`
   max-width: 80%;
-  max-height: auto;
 `;
 
 export const ModalButtonLeft = styled(Button)`
@@ -208,5 +207,21 @@ export const CarouselMoveRight = styled.div`
   margin-right: 15px;
   overflow: hidden;
   animation: ${MovementoRight} 0.2s ease-in-out;
+`;
+
+const MovementoLeft = keyframes`
+  from { transform: translateX(0px); }
+  to { transform: translateX(500px); }
+`;
+
+export const CarouselMoveLeft = styled.div`
+  z-index: 2;
+  min-height: 167px;
+  min-width: 167px;
+  max-height: 167px;
+  max-width: 167px;
+  margin-right: 15px;
+  overflow: hidden;
+  animation: ${MovementoLeft} 0.2s ease-in-out;
 `;
 
