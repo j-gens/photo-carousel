@@ -92,6 +92,7 @@ export const CarouselLineWrapper = styled.div`
   flex-direction: row;
   justify-content: unsafe center;
   overflow: hidden;
+  justify-content: space-evenly;
 
   z-index: 1;
   grid-column-start: 1;
@@ -226,3 +227,4 @@ export const CarouselMoveLeft = styled.div`
   overflow: hidden;
   animation: ${MovementoLeft} 0.2s ease-in-out;
 `;
+        
