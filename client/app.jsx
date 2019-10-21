@@ -13,17 +13,21 @@ class App extends React.Component {
       carousel: [],
       carouselByFours: [],
       currentFour: [],
-      currentIndex: 0
+      currentIndex: 0,
+      animate: '',
+      leadingFour: [],
+      laggingFour: []
     }
 
     this.fetch = this.fetch.bind(this);
     this.groupImagesByFours = this.groupImagesByFours.bind(this);
+    this.leadingOrLagging = this.leadingOrLagging.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   //currently hardcoded to get specific movie
   componentDidMount() {
-    this.fetch('imgsmall', 21211);
+    this.fetch('imgsmall', 21213);
   }
 
   componentWillUnmount() {
@@ -53,6 +57,10 @@ class App extends React.Component {
     var count = carousel.length;
     var selectedFour = [];
     var allGroupsOfFour = [];
+
+    var lagFour = [];
+    var leadFour = [];
+
     var genericImage= {"_id": "placeholder",
       "small_url": "https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/ph-thumb.gif"};
 
@@ -62,20 +70,56 @@ class App extends React.Component {
         selectedFour.push(genericImage);
       }
       allGroupsOfFour.push(selectedFour);
+    } else {
+      var i = 0;
+      while (i < count) {
+        selectedFour = carousel.slice(i, i + 4);
+        if (selectedFour.length < 4) {
+          selectedFour = carousel.slice(-4);
+        }
+        allGroupsOfFour.push(selectedFour);
+        i = i + 4;
+      }
     }
 
-    var i = 0;
-    while (i < count) {
-      selectedFour = carousel.slice(i, i + 4);
-      if (selectedFour.length < 4) {
-        selectedFour = carousel.slice(-4);
-      }
-      allGroupsOfFour.push(selectedFour);
-      i = i + 4;
+    if (allGroupsOfFour.length === 1) {
+      lagFour = allGroupsOfFour[0];
+      leadFour = allGroupsOfFour[0];
+    } else {
+      lagFour = allGroupsOfFour[allGroupsOfFour.length - 1];
+      leadFour = allGroupsOfFour[1];
     }
 
     this.setState({carouselByFours: allGroupsOfFour,
-      currentFour: allGroupsOfFour[0]});
+      currentFour: allGroupsOfFour[0],
+      laggingFour: lagFour,
+      leadingFour: leadFour});
+
+  }
+
+  leadingOrLagging(index) {
+    var maxLength = this.state.carouselByFours.length - 1;
+    var upIndex = this.state.currentIndex + 1;
+    var downIndex = this.state.currentIndex - 1;
+
+    if (index === maxLength) {
+      this.setState({leadingFour: this.state.carouselByFours[0]});
+      if (this.state.carouselByFours[downIndex]) {
+        this.setState({laggingFour: this.state.carouselByFours[downIndex]});
+      }
+    } else if (index === 0) {
+      this.setState({laggingFour: this.state.carouselByFours[maxLength]});
+      if (this.state.carouselByFours[upIndex]) {
+        this.setState({leadingFour: this.state.carouselByFours[upIndex]});
+      }
+    } else {
+      if (this.state.carouselByFours[upIndex]) {
+        this.setState({leadingFour: this.state.carouselByFours[upIndex]});
+      }
+      if (this.state.carouselByFours[downIndex]) {
+        this.setState({laggingFour: this.state.carouselByFours[downIndex]});
+      }
+    }
   }
 
   //change currentFour displayed (cycle through carousel)
@@ -86,22 +130,26 @@ class App extends React.Component {
 
     if (event.target.value === '>') {
       if (this.state.currentIndex === maxLength) {
-        this.setState({currentFour: this.state.carouselByFours[0],
-          currentIndex: 0})
+        this.setState({animate: 'right'});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[0],
+          currentIndex: 0, animate: ''})}, 200)
       } else {
-        this.setState({currentFour: this.state.carouselByFours[upIndex],
-          currentIndex: upIndex})
+        this.setState({animate: 'right'});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[upIndex],
+          currentIndex: upIndex, animate: ''})}, 200);
       }
     }
     if (event.target.value === '<') {
       if (this.state.currentIndex === 0) {
-        this.setState({currentFour: this.state.carouselByFours[maxLength],
-          currentIndex: maxLength})
+        this.setState({animate: 'left'});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[maxLength],
+          currentIndex: maxLength, animate: ''})}, 200);
       } else {
-        this.setState({currentFour: this.state.carouselByFours[downIndex],
-          currentIndex: downIndex})
+        this.setState({animate: 'left'});
+        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex], currentIndex: downIndex, animate: ''})}, 200);
       }
     }
+    this.leadingOrLagging(this.state.currentIndex);
   }
 
   render() {
@@ -119,7 +167,11 @@ class App extends React.Component {
         </CarouselHeaderWrapper>
         <CarouselBinWrapper>
           <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
-          <Carousel carousel={this.state.currentFour} length={this.state.carousel.length} />
+          <Carousel carousel={this.state.currentFour}
+          length={this.state.carousel.length}
+          animate={this.state.animate}
+          leader={this.state.leadingFour}
+          lagger={this.state.laggingFour} />
           <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
         </CarouselBinWrapper>
         <CarouselViewAllWrapper>
