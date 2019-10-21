@@ -8,8 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 
-app.get('/api/imgsmall/:movieId', (req, res) => {
-  db.getCarousel(req.params.movieId, req.path, (err, data) => {
+app.get('/api/imgsmall/', (req, res) => {
+  console.log(req.query);
+  db.getCarousel(req.query.movietitle, req.path, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
@@ -19,8 +20,8 @@ app.get('/api/imgsmall/:movieId', (req, res) => {
 });
 
 
-app.get('/api/imglarge/:movieId', (req, res) => {
-  db.getCarousel(req.params.movieId, req.path, (err, data) => {
+app.get('/api/imglarge/', (req, res) => {
+  db.getCarousel(req.query.movietitle, req.path, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
