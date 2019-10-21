@@ -27,7 +27,7 @@ class App extends React.Component {
 
   //currently hardcoded to get specific movie
   componentDidMount() {
-    this.fetch('imgsmall', 21213);
+    this.fetch('Sleeping Beauty');
   }
 
   componentWillUnmount() {
@@ -35,8 +35,8 @@ class App extends React.Component {
   }
 
   //will be used to get both thumbnails and large images
-  fetch(url, params) {
-    axios.get(`/api/${url}/${params}`)
+  fetch(params) {
+    axios.get(`/api/imgsmall/?movietitle=${params}`)
     .then(response => {
       console.log(response);
       this.setState({carousel: response.data})

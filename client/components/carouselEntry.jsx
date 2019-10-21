@@ -24,7 +24,7 @@ class CarouselEntry extends React.Component {
   handleClick() {
     this.setState({clickedPhoto: this.props.entry._id});
 
-    axios.get(`/api/imglarge/${this.props.entry.movie.id}`)
+    axios.get(`/api/imglarge/?movietitle=${this.props.entry.movie.title}`)
     .then(response => {
       console.log(response);
       this.setState({largeCarousel: response.data})
