@@ -27,7 +27,7 @@ class App extends React.Component {
 
   //currently hardcoded to get specific movie
   componentDidMount() {
-    this.fetch('imgsmall', 21211);
+    this.fetch('imgsmall', 21210);
   }
 
   componentWillUnmount() {
@@ -63,22 +63,23 @@ class App extends React.Component {
 
     var genericImage= {"_id": "placeholder",
       "small_url": "https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/ph-thumb.gif"};
+
     if (carousel.length < 4) {
       selectedFour = carousel.slice();
       while (selectedFour.length < 4) {
         selectedFour.push(genericImage);
       }
       allGroupsOfFour.push(selectedFour);
-    }
-
-    var i = 0;
-    while (i < count) {
-      selectedFour = carousel.slice(i, i + 4);
-      if (selectedFour.length < 4) {
-        selectedFour = carousel.slice(-4);
+    } else {
+      var i = 0;
+      while (i < count) {
+        selectedFour = carousel.slice(i, i + 4);
+        if (selectedFour.length < 4) {
+          selectedFour = carousel.slice(-4);
+        }
+        allGroupsOfFour.push(selectedFour);
+        i = i + 4;
       }
-      allGroupsOfFour.push(selectedFour);
-      i = i + 4;
     }
 
     if (allGroupsOfFour.length === 1) {
