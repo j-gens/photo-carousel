@@ -8,6 +8,7 @@ export const CarouselBodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  margin-left: 10px;
 `;
 
 export const CarouselHeaderWrapper = styled.div`
@@ -124,7 +125,8 @@ export const CarouselEntryWrapper = styled.div`
   min-width: 167px;
   max-height: 167px;
   max-width: 167px;
-  margin-right: 15px;
+  margin-right: 7px;
+  margin-left: 7px;
   overflow: hidden;
 `;
 

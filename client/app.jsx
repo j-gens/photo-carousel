@@ -27,7 +27,7 @@ class App extends React.Component {
 
   //currently hardcoded to get specific movie
   componentDidMount() {
-    this.fetch('imgsmall', 21210);
+    this.fetch('imgsmall', 21213);
   }
 
   componentWillUnmount() {
