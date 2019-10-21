@@ -30,7 +30,7 @@ const save = (data, callback) => {
   }
 };
 
-const getCarousel = (movieId, path, callback) => {
+const getCarousel = (movieTitle, path, callback) => {
   var imageSize = undefined;
 
   path = path.slice(0, 14);
@@ -40,7 +40,7 @@ const getCarousel = (movieId, path, callback) => {
     imageSize = 'small_url'
   }
 
-  Carousel.find({'movie.id': movieId}, `${imageSize} movie`, (err, results) => {
+  Carousel.find({'movie.title': movieTitle}, `${imageSize} movie`, (err, results) => {
     if (err) {
       callback(err);
     } else {
