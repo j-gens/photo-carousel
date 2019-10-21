@@ -89,7 +89,7 @@ export const CarouselViewAllLink = styled.a`
 export const CarouselLineWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: unsafe center;
   overflow: hidden;
 
   z-index: 1;
@@ -120,12 +120,17 @@ export const CarouselNavbarWrapper = styled.div`
 
 export const CarouselEntryWrapper = styled.div`
   z-index: 2;
+  min-height: 167px;
+  min-width: 167px;
   max-height: 167px;
   max-width: 167px;
+  margin-right: 15px;
   overflow: hidden;
 `;
 
 export const CarouselEntryImg = styled.img`
+  min-height: 167px;
+  min-width: 167px;
   max-height: 167px;
   max-width: 167px;
   ${CarouselEntryWrapper}: hover & {
@@ -188,29 +193,34 @@ export const ModalButtonRight = styled(Button)`
   background-color: black;
 `;
 
-
 const MovementoRight = keyframes`
   from { transform: translateX(0px); }
-  to { transform: translateX(167px); }
+  to { transform: translateX(-500px); }
 `;
 
 export const CarouselMoveRight = styled.div`
   z-index: 2;
+  min-height: 167px;
+  min-width: 167px;
   max-height: 167px;
   max-width: 167px;
+  margin-right: 15px;
   overflow: hidden;
-  animation: ${MovementoRight} 0.25s ease-in-out infinite;
+  animation: ${MovementoRight} 0.2s ease-in-out;
 `;
 
 const MovementoLeft = keyframes`
   from { transform: translateX(0px); }
-  to { transform: translateX(-167px); }
+  to { transform: translateX(500px); }
 `;
 
 export const CarouselMoveLeft = styled.div`
   z-index: 2;
+  min-height: 167px;
+  min-width: 167px;
   max-height: 167px;
   max-width: 167px;
+  margin-right: 15px;
   overflow: hidden;
-  animation: ${MovementoLeft} 0.25s ease-in-out infinite;
+  animation: ${MovementoLeft} 0.2s ease-in-out;
 `;
