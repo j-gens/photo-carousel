@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { CarouselEntryWrapper, CarouselEntryImg, ModalButtonRight, ModalButtonLeft, ModalBin, ModalImage, Modal, ModalHeader, ModalXButton, ModalCount, CarouselMoveRight, CarouselMoveLeft } from './stylesheet.jsx';
+import { CarouselEntryWrapper, CarouselEntryImg, ModalButtonRight, ModalButtonLeft, ModalBin, ModalImage, Modal, ModalHeader, ModalXButton, ModalCount, CarouselMoveRight, CarouselMoveLeft, ModalImageBin } from './stylesheet.jsx';
 
 
 class CarouselEntry extends React.Component {
@@ -86,7 +86,7 @@ class CarouselEntry extends React.Component {
                 </ModalHeader>
                 <ModalBin>
                   <ModalButtonLeft value="<" onClick={this.modalClick}>{'<'}</ModalButtonLeft>
-                  <ModalImage src={this.state.currentPhoto}></ModalImage>
+                    <ModalImage src={this.state.currentPhoto}></ModalImage>
                   <ModalButtonRight value=">" onClick={this.modalClick}>{'>'}</ModalButtonRight>
                 </ModalBin>
             </Modal>

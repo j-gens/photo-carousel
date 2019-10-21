@@ -146,6 +146,7 @@ export const Modal = styled.div`
   left: 0;
   top: 0;
   height: 100%;
+  width: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -181,6 +182,7 @@ export const ModalBin = styled.div`
 
 export const ModalImage = styled.img`
   max-width: 80%;
+  max-height: 300px;
 `;
 
 export const ModalButtonLeft = styled(Button)`
