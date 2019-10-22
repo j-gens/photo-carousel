@@ -1,5 +1,13 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/carousel');
+
+//set up for future deployment:
+let mongo = process.env.MONGO;
+if (mongo == null || mongo == "") {
+  mongo = 'mongodb://localhost/carousel';
+}
+
+mongoose.connect(mongo);
 
 
 let carouselSchema = new mongoose.Schema({
