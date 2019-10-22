@@ -1,5 +1,6 @@
 const express = require('express');
 const app = require('./app.js');
+require('dotenv').config();
 
 
 //set up for future deployment:
