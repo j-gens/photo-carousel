@@ -2,8 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import Navigation from './components/navigation.jsx';
 import Carousel from './components/carousel.jsx';
-import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselHeaderTitle, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, CarTitle } from './components/stylesheet.jsx';
+import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselHeaderTitle, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, CarTitle, PlayNiceWrapper } from './components/stylesheet.jsx';
 
+//may need to update in two places - here and components/carouselEntry.jsx
+const port = 3100;
 
 class App extends React.Component {
   constructor(props) {
@@ -36,7 +38,8 @@ class App extends React.Component {
 
   //will be used to get both thumbnails and large images
   fetch(params) {
-    axios.get(`/api/imgsmall/?movietitle=${params}`)
+    params = window.location.search.slice(12) || params;
+    axios.get(`http://localhost:${port}/api/imgsmall/?movietitle=${params}`)
     .then(response => {
       console.log(response);
       this.setState({carousel: response.data})
@@ -155,32 +158,33 @@ class App extends React.Component {
 
   render() {
     return (
-      <CarouselBodyWrapper>
-        <CarouselHeaderWrapper>
-          <CarouselHeaderRed>
-            <CarouselHeaderTitle>
-              <CarTitle>{this.state.currentMovie.toUpperCase()}</CarTitle> PHOTOS
-            </CarouselHeaderTitle>
-          </CarouselHeaderRed>
-          <CarouselNavbarBin>
-            <Navigation total={this.state.carouselByFours} index={this.state.currentIndex} />
-          </CarouselNavbarBin>
-        </CarouselHeaderWrapper>
-        <div id="imgmodal"></div>
-        <CarouselBinWrapper>
-          <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
-          <Carousel carousel={this.state.currentFour}
-          length={this.state.carousel.length}
-          animate={this.state.animate}
-          leader={this.state.leadingFour}
-          lagger={this.state.laggingFour} />
-          <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
-        </CarouselBinWrapper>
-        <CarouselViewAllWrapper>
-          <CarouselViewAllLink href="http://www.google.com">View All Photos ({this.state.carousel.length})
-          </CarouselViewAllLink>
-        </CarouselViewAllWrapper>
-      </CarouselBodyWrapper>
+      <PlayNiceWrapper>
+        <CarouselBodyWrapper>
+          <CarouselHeaderWrapper>
+            <CarouselHeaderRed>
+              <CarouselHeaderTitle>
+                <CarTitle>{this.state.currentMovie.toUpperCase()}</CarTitle> PHOTOS
+              </CarouselHeaderTitle>
+            </CarouselHeaderRed>
+            <CarouselNavbarBin>
+              <Navigation total={this.state.carouselByFours} index={this.state.currentIndex} />
+            </CarouselNavbarBin>
+          </CarouselHeaderWrapper>
+          <CarouselBinWrapper>
+            <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
+            <Carousel carousel={this.state.currentFour}
+            length={this.state.carousel.length}
+            animate={this.state.animate}
+            leader={this.state.leadingFour}
+            lagger={this.state.laggingFour} />
+            <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
+          </CarouselBinWrapper>
+          <CarouselViewAllWrapper>
+            <CarouselViewAllLink href="http://www.google.com">View All Photos ({this.state.carousel.length})
+            </CarouselViewAllLink>
+          </CarouselViewAllWrapper>
+        </CarouselBodyWrapper>
+      </PlayNiceWrapper>
     );
   }
 }
