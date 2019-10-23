@@ -166,6 +166,7 @@ class App extends React.Component {
             <Navigation total={this.state.carouselByFours} index={this.state.currentIndex} />
           </CarouselNavbarBin>
         </CarouselHeaderWrapper>
+        <div id="imgmodal"></div>
         <CarouselBinWrapper>
           <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
           <Carousel carousel={this.state.currentFour}
