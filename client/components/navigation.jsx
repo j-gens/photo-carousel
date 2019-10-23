@@ -6,7 +6,7 @@ import { CarouselNavbarWrapper } from './stylesheet.jsx';
 const Navigation = (props) => (
   <CarouselNavbarWrapper>
     {props.total.map((ele, idx) =>
-      <NavigationEntry idx={idx} index={props.index} />
+      <NavigationEntry idx={idx} key={idx} index={props.index} />
     )}
   </CarouselNavbarWrapper>
 )
