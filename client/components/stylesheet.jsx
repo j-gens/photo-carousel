@@ -4,7 +4,8 @@ import styled, { keyframes, css } from 'styled-components';
 
 export const CarouselBodyWrapper = styled.div`
   background: white;
-  max-width: 725px;
+  height: 225px;
+  width: 725px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
