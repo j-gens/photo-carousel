@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: './client/index.jsx',
   output: {
@@ -12,6 +14,11 @@ module.exports = {
         loader: 'babel-loader'
       }
     }]
+  },
+  resolve: {
+    alias: {
+      "styled-components": path.resolve(__dirname, "node_modules", "styled-components")
+    }
   },
   watch: true
 }
