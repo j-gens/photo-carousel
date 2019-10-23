@@ -2,14 +2,23 @@ import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
 
-export const CarouselBodyWrapper = styled.div`
-  background: white;
-  height: 225px;
-  width: 725px;
+export const PlayNiceWrapper = styled.div`
+  padding: 10px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  margin-left: 10px;
+  align-items: center;
+  flex-wrap: nowrap;
+  min-height: 250px;
+  max-height: 250px;
+`;
+
+export const CarouselBodyWrapper = styled.div`
+  background: white;
+  min-width: 725px;
+  max-width: 725px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const CarouselHeaderWrapper = styled.div`
@@ -131,10 +140,7 @@ export const CarouselEntryWrapper = styled.div`
 `;
 
 export const CarouselEntryImg = styled.img`
-  min-height: 167px;
-  min-width: 167px;
-  max-height: 167px;
-  max-width: 167px;
+  max-width: 100%;
   ${CarouselEntryWrapper}: hover & {
     transform: scale(1.1);
     transition: transform .15s ease-in-out;
