@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Navigation from './components/navigation.jsx';
 import Carousel from './components/carousel.jsx';
-import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselHeaderTitle, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, CarTitle, PlayNiceWrapper } from './components/stylesheet.jsx';
+import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, PlayNiceWrapper } from './components/stylesheet.jsx';
 
 //may need to update in two places - here and components/carouselEntry.jsx
 const port = 3100;
@@ -162,9 +162,7 @@ class App extends React.Component {
         <CarouselBodyWrapper>
           <CarouselHeaderWrapper>
             <CarouselHeaderRed>
-              <CarouselHeaderTitle>
-                <CarTitle>{this.state.currentMovie.toUpperCase()}</CarTitle> PHOTOS
-              </CarouselHeaderTitle>
+              <em>{this.state.currentMovie.toUpperCase()}</em> PHOTOS
             </CarouselHeaderRed>
             <CarouselNavbarBin>
               <Navigation total={this.state.carouselByFours} index={this.state.currentIndex} />

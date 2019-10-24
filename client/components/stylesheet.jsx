@@ -15,8 +15,8 @@ export const PlayNiceWrapper = styled.div`
 
 export const CarouselBodyWrapper = styled.div`
   background: white;
-  min-width: 725px;
-  max-width: 725px;
+  min-width: 800px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
 `;
@@ -27,26 +27,32 @@ export const CarouselHeaderWrapper = styled.div`
 `;
 
 export const CarouselHeaderRed = styled.div`
-  background: red;
-  height: 15px;
-  margin-top: 5px;
-`;
-
-export const CarouselHeaderTitle = styled.div`
   background: white;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
   font-weight: bold;
-  transform: scale(1, 1.7);
-  padding-right: 5px;
-  padding-left: 5px;
-  display: inline-flex;
-  margin-left: 25px;
-`;
+  font-size: 18px;
+  font-family: Helvetica, sans-serif;
+  padding-left: 25px;
+  position: relative;
+  overflow: hidden;
 
-export const CarTitle = styled.div`
-  font-style: italic;
-  margin-right: 3px;
+  ::before {
+    background-color: #FA320A;
+    content: ' ';
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    position: absolute;
+    left: 0;
+  }
+  ::after {
+    content: ' ';
+    background-color: #FA320A;
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    margin-left: 10px;
+    display: inline-block;
+  }
 `;
 
 export const CarouselNavbarBin = styled.div`
@@ -154,7 +160,7 @@ export const Modal = styled.div`
   top: 0;
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
