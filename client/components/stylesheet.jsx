@@ -29,7 +29,7 @@ export const CarouselHeaderWrapper = styled.div`
 export const CarouselHeaderRed = styled.div`
   background: white;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 24px;
   font-family: Helvetica, sans-serif;
   padding-left: 25px;
   position: relative;
@@ -92,8 +92,10 @@ export const CarouselButtonRight = styled(Button)`
 `;
 
 export const CarouselViewAllWrapper = styled.div`
+  @import url('https://fonts.googleapis.com/css?family=Satisfy|Roboto&display=swap');
+
   margin-right: 15px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 12px;
 `;
 
@@ -136,12 +138,12 @@ export const CarouselNavbarWrapper = styled.div`
 
 export const CarouselEntryWrapper = styled.div`
   z-index: 2;
-  min-height: 167px;
-  min-width: 167px;
-  max-height: 167px;
-  max-width: 167px;
-  margin-right: 7px;
-  margin-left: 7px;
+  min-height: 180px;
+  min-width: 180px;
+  max-height: 180px;
+  max-width: 180px;
+  margin-right: 10px;
+  margin-left: 10px;
   overflow: hidden;
 `;
 
@@ -156,8 +158,8 @@ export const CarouselEntryImg = styled.img`
 export const Modal = styled.div`
   z-index: 1070;
   background-color: black;
-  left: 0;
-  top: 0;
+  left: 0%;
+  top: 0%;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -215,10 +217,10 @@ const MovementoRight = keyframes`
 
 export const CarouselMoveRight = styled.div`
   z-index: 2;
-  min-height: 167px;
-  min-width: 167px;
-  max-height: 167px;
-  max-width: 167px;
+  min-height: 180px;
+  min-width: 180px;
+  max-height: 180px;
+  max-width: 180px;
   margin-right: 15px;
   overflow: hidden;
   animation: ${MovementoRight} 0.2s ease-in-out;
@@ -231,10 +233,10 @@ const MovementoLeft = keyframes`
 
 export const CarouselMoveLeft = styled.div`
   z-index: 2;
-  min-height: 167px;
-  min-width: 167px;
-  max-height: 167px;
-  max-width: 167px;
+  min-height: 180px;
+  min-width: 180px;
+  max-height: 180px;
+  max-width: 180px;
   margin-right: 15px;
   overflow: hidden;
   animation: ${MovementoLeft} 0.2s ease-in-out;

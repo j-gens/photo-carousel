@@ -178,7 +178,7 @@ class App extends React.Component {
             <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
           </CarouselBinWrapper>
           <CarouselViewAllWrapper>
-            <CarouselViewAllLink href="http://www.google.com">View All Photos ({this.state.carousel.length})
+            <CarouselViewAllLink>Total Photos ({this.state.carousel.length})
             </CarouselViewAllLink>
           </CarouselViewAllWrapper>
         </CarouselBodyWrapper>
