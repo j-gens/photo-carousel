@@ -9,8 +9,8 @@ export const PlayNiceWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   flex-wrap: nowrap;
-  min-height: 250px;
-  max-height: 250px;
+  min-height: 265px;
+  max-height: 265px;
 `;
 
 export const CarouselBodyWrapper = styled.div`
@@ -34,6 +34,7 @@ export const CarouselHeaderRed = styled.div`
   padding-left: 25px;
   position: relative;
   overflow: hidden;
+  line-height: 24px;
 
   ::before {
     background-color: #FA320A;
