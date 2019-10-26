@@ -5,7 +5,6 @@ module.exports = {
     path: __dirname + '/public',
     filename: 'bundled.js'
   },
-  target: 'node',
   module: {
     rules: [{
       test: /\.js/,
