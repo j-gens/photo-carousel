@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { CarouselEntryWrapper, CarouselEntryImg, ModalButtonRight, ModalButtonLeft, ModalBin, ModalImage, Modal, ModalHeader, ModalXButton, ModalCount, CarouselMoveRight, CarouselMoveLeft, ModalImageBin } from './stylesheet.jsx';
 
-const port = 3100;
+//for deployment
+import dotenv from 'dotenv';
+dotenv.config();
+
+const port = process.env.PORT;
+const host = process.env.HOST;
+
 
 class CarouselEntry extends React.Component {
   constructor(props) {
@@ -25,7 +31,7 @@ class CarouselEntry extends React.Component {
   handleClick() {
     this.setState({clickedPhoto: this.props.entry._id});
 
-    axios.get(`http://localhost:${port}/api/imglarge/?movietitle=${this.props.entry.movie.title}`)
+    axios.get(`${host}:${port}/api/imglarge/?movietitle=${this.props.entry.movie.title}`)
     .then(response => {
       console.log(response);
       this.setState({largeCarousel: response.data})

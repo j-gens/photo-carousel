@@ -4,8 +4,12 @@ import Navigation from './components/navigation.jsx';
 import Carousel from './components/carousel.jsx';
 import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, PlayNiceWrapper } from './components/stylesheet.jsx';
 
-//may need to update in two places - here and components/carouselEntry.jsx
-const port = 3100;
+//for deployment
+import { dotenv } from 'dotenv';
+dotenv.config();
+
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 class App extends React.Component {
   constructor(props) {
@@ -39,7 +43,7 @@ class App extends React.Component {
   //will be used to get both thumbnails and large images
   fetch(params) {
     params = window.location.search.slice(12) || params;
-    axios.get(`http://localhost:${port}/api/imgsmall/?movietitle=${params}`)
+    axios.get(`${host}:${port}/api/imgsmall/?movietitle=${params}`)
     .then(response => {
       console.log(response);
       this.setState({carousel: response.data})
