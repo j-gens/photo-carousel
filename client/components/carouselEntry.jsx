@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { CarouselEntryWrapper, CarouselEntryImg, ModalButtonRight, ModalButtonLeft, ModalBin, ModalImage, Modal, ModalHeader, ModalXButton, ModalCount, CarouselMoveRight, CarouselMoveLeft, ModalImageBin } from './stylesheet.jsx';
 
-//for deployment
-import dotenv from 'dotenv';
-dotenv.config();
 
-const port = process.env.PORT;
-const host = process.env.HOST;
+//for deployment -- also will need to update in ../app.jsx
+const port = 3100;
+const host = 'http://localhost';
 
 
 class CarouselEntry extends React.Component {

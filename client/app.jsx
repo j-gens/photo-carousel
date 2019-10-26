@@ -4,12 +4,9 @@ import Navigation from './components/navigation.jsx';
 import Carousel from './components/carousel.jsx';
 import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, PlayNiceWrapper } from './components/stylesheet.jsx';
 
-//for deployment
-import { dotenv } from 'dotenv';
-dotenv.config();
-
-const port = process.env.PORT;
-const host = process.env.HOST;
+//for deployment -- also will need to update in components/carouselEntry.jsx
+const port = 3100;
+const host = 'http://localhost';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +30,7 @@ class App extends React.Component {
 
   //currently hardcoded to get specific movie
   componentDidMount() {
-    this.fetch('Sleeping Beauty');
+    this.fetch('sleeping beauty');
   }
 
   componentWillUnmount() {
@@ -43,6 +40,7 @@ class App extends React.Component {
   //will be used to get both thumbnails and large images
   fetch(params) {
     params = window.location.search.slice(12) || params;
+    params
     axios.get(`${host}:${port}/api/imgsmall/?movietitle=${params}`)
     .then(response => {
       console.log(response);
