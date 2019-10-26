@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Navigation from './components/navigation.jsx';
 import Carousel from './components/carousel.jsx';
-import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, PlayNiceWrapper } from './components/stylesheet.jsx';
+import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, PlayNiceWrapper, NoMovies } from './components/stylesheet.jsx';
 
 //for deployment -- also will need to update in components/carouselEntry.jsx
 const port = 3100;
@@ -14,6 +14,7 @@ class App extends React.Component {
     this.state = {
       currentMovie: '',
       carousel: [],
+      noMovies: true,
       carouselByFours: [],
       currentFour: [],
       currentIndex: 0,
@@ -23,6 +24,7 @@ class App extends React.Component {
     }
 
     this.fetch = this.fetch.bind(this);
+    this.isResEmpty = this.isResEmpty.bind(this);
     this.groupImagesByFours = this.groupImagesByFours.bind(this);
     this.leadingOrLagging = this.leadingOrLagging.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -40,11 +42,11 @@ class App extends React.Component {
   //will be used to get both thumbnails and large images
   fetch(params) {
     params = window.location.search.slice(12) || params;
-    params
     axios.get(`${host}:${port}/api/imgsmall/?movietitle=${params}`)
     .then(response => {
       console.log(response);
-      this.setState({carousel: response.data})
+      this.setState({carousel: response.data});
+      this.isResEmpty();
     })
     .finally(() => {
       this.setState({currentMovie: this.state.carousel[0].movie.title});
@@ -55,6 +57,13 @@ class App extends React.Component {
     })
   }
 
+  isResEmpty() {
+    if (this.state.carousel.length === 0) {
+      this.setState({noMovies: true});
+    } else {
+      this.setState({noMovies: false});
+    }
+  }
   //this function breaks the images into an array of arrays
     //inner arrays have four images each in them
     //if movie has < 4 images total then add in 'blank' image as placeholder
@@ -99,7 +108,6 @@ class App extends React.Component {
       currentFour: allGroupsOfFour[0],
       laggingFour: lagFour,
       leadingFour: leadFour});
-
   }
 
   leadingOrLagging(index) {
@@ -159,6 +167,22 @@ class App extends React.Component {
   }
 
   render() {
+    if (this.state.noMovies) {
+      return (
+        <PlayNiceWrapper>
+          <NoMovies>
+            Oops!  It looks like that movie is not in our database... why don't you try searching for one of these instead?
+            <br></br>
+            <br></br>
+            Detective Pikachu, Lion King, Frozen, Brave, The Rescuers, Sleeping Beauty, Robin Hood, Shrek, Lego Batman, Hercules, Mulan
+            <br></br>
+            <br></br>
+            Try searching by adding '/?movietitle={'{movie}'}' to the end of address bar above!
+          </NoMovies>
+        </PlayNiceWrapper>
+      )
+    }
+
     return (
       <PlayNiceWrapper>
         <CarouselBodyWrapper>
