@@ -5,7 +5,7 @@ const randomNumber = (maxInt) => {
   return Math.floor(Math.random() * maxInt)
 }
 
-const movieIds = ['Detective Pikachu', 'Lion King', 'Frozen', 'Brave', 'The Rescuers', 'Sleeping Beauty', 'Robin Hood', 'Shrek', 'Lego Batman', 'Hercules', 'Mulan']
+const movieIds = ['detective pikachu', 'lion king', 'frozen', 'brave', 'the rescuers', 'sleeping beauty', 'robin hood', 'shrek', 'lego batman', 'hercules', 'mulan']
 
 const generateDataArray = (entries) => {
   const fakeData = [];
