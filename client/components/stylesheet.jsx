@@ -243,3 +243,17 @@ export const CarouselMoveLeft = styled.div`
   animation: ${MovementoLeft} 0.2s ease-in-out;
 `;
 
+export const NoMovies = styled.div`
+  background: white;
+  min-width: 800px;
+  max-width: 800px;
+  text-align: center;
+
+  @import url('https://fonts.googleapis.com/css?family=Satisfy|Roboto&display=swap');
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: red;
+
+`;
+
