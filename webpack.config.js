@@ -1,4 +1,3 @@
-const path = require('path');
 
 module.exports = {
   entry: './client/index.jsx',
@@ -6,6 +5,7 @@ module.exports = {
     path: __dirname + '/public',
     filename: 'bundled.js'
   },
+  target: 'node',
   module: {
     rules: [{
       test: /\.js/,
