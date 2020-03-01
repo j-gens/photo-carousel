@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import Navigation from './components/navigation.jsx';
 import Carousel from './components/carousel.jsx';
 import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, PlayNiceWrapper, NoMovies } from './components/stylesheet.jsx';
@@ -22,52 +23,39 @@ class App extends React.Component {
       leadingFour: [],
       laggingFour: []
     }
-
-    this.fetch = this.fetch.bind(this);
-    this.isResEmpty = this.isResEmpty.bind(this);
-    this.groupImagesByFours = this.groupImagesByFours.bind(this);
-    this.leadingOrLagging = this.leadingOrLagging.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   //currently hardcoded to get specific movie
-  componentDidMount() {
-    this.fetch('sleeping beauty');
-  }
+  componentDidMount = () => this.fetch('sleeping beauty');
 
-  componentWillUnmount() {
-    //for testing purposes
-  }
+  componentWillUnmount = () => { /* for testing purposes */ };
 
   //will be used to get both thumbnails and large images
-  fetch(params) {
+  fetch = (params) => {
     params = window.location.search.slice(12) || params;
     axios.get(`${host}:${port}/api/imgsmall/?movietitle=${params}`)
-    .then(response => {
-      console.log(response);
-      this.setState({carousel: response.data});
-      this.isResEmpty();
-    })
-    .finally(() => {
-      this.setState({currentMovie: this.state.carousel[0].movie.title});
-      this.groupImagesByFours(this.state.carousel);
+    .then((response) => {
+      this.setState({carousel: response.data}, () => this.isResEmpty());
     })
     .catch(error => {
       console.log(error);
     })
   }
 
-  isResEmpty() {
-    if (this.state.carousel.length === 0) {
-      this.setState({noMovies: true});
-    } else {
-      this.setState({noMovies: false});
+  isResEmpty = () => {
+    const { carousel } = this.state;
+    if (carousel.length > 0) {
+      this.setState({
+        noMovies: false,
+        currentMovie: carousel[0].movie.title
+        }, () => this.groupImagesByFours());
     }
   }
   //this function breaks the images into an array of arrays
     //inner arrays have four images each in them
     //if movie has < 4 images total then add in 'blank' image as placeholder
-  groupImagesByFours(carousel) {
+  groupImagesByFours = () => {
+    const carousel = this.state.carousel;
     var count = carousel.length;
     var selectedFour = [];
     var allGroupsOfFour = [];
@@ -110,7 +98,7 @@ class App extends React.Component {
       leadingFour: leadFour});
   }
 
-  leadingOrLagging(index) {
+  leadingOrLagging = (index) => {
     var maxLength = this.state.carouselByFours.length - 1;
     var upIndex = this.state.currentIndex + 1;
     var downIndex = this.state.currentIndex - 1;
@@ -137,7 +125,7 @@ class App extends React.Component {
   }
 
   //change currentFour displayed (cycle through carousel)
-  handleClick(event) {
+  handleClick = (event) => {
     var maxLength = this.state.carouselByFours.length - 1;
     var upIndex = this.state.currentIndex + 1;
     var downIndex = this.state.currentIndex - 1;
@@ -166,18 +154,20 @@ class App extends React.Component {
     this.leadingOrLagging(this.state.currentIndex);
   }
 
-  render() {
+  render = () => {
     if (this.state.noMovies) {
       return (
         <PlayNiceWrapper>
           <NoMovies>
-            Oops!  It looks like that movie is not in our database... why don't you try searching for one of these instead?
-            <br></br>
-            <br></br>
-            Detective Pikachu, Lion King, Frozen, Brave, The Rescuers, Sleeping Beauty, Robin Hood, Shrek, Lego Batman, Hercules, Mulan
-            <br></br>
-            <br></br>
-            Try searching by adding '/?movietitle={'{movie}'}' to the end of address bar above!
+            <p>
+              Oops!  It looks like that movie is not in our database... why don't you try searching for one of these instead?
+            </p>
+            <p>
+              Detective Pikachu, Lion King, Frozen, Brave, The Rescuers, Sleeping Beauty, Robin Hood, Shrek, Lego Batman, Hercules, Mulan
+            </p>
+            <p>
+              Try searching by adding '/?movietitle={'{movie}'}' to the end of address bar above!
+            </p>
           </NoMovies>
         </PlayNiceWrapper>
       )
