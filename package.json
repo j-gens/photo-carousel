@@ -5,16 +5,13 @@
   "main": "server/index.js",
   "scripts": {
     "test": "jest spec --detectOpenHandles",
-    "start": "nodemon server/index.js",
-    "build": "webpack -d",
-    "seed": "node database/seed.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hrr41-FEC-krillin/photo-carousel.git"
+    "dev": "nodemon server/index.js && webpack -d",
+    "build": "webpack",
+    "seed": "node database/seed.js",
+    "start": "node server/index.js"
   },
   "author": "j-gens",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.6.3",
     "@babel/core": "^7.6.3",
@@ -42,9 +39,6 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.2",
-    "eslint": "^6.5.1",
-    "eslint-config-hackreactor": "github:hackreactor-labs/eslint-config-hackreactor",
-    "eslint-plugin-react": "^7.16.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
     "supertest": "^4.0.2"
