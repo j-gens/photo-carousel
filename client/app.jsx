@@ -93,48 +93,23 @@ class App extends React.Component {
     });
   }
 
-  determineStateValues = (i) => {
+  determineStateIndexes = () => {
     const { carouselOfTetras, currentIndex, leftIndex, rightIndex } = this.state;
-    const maxLength = carouselOfTetras.length - 1;
-
-    if (i === maxLength) {
-
+    if (carouselOfTetras.length === 1) return;
+    if (currentIndex === carouselOfTetras.length - 1) {
+      this.setState({rightIndex: 0, leftIndex: currentIndex - 1});
+      return;
     }
-
-
-    var upIndex = this.state.currentIndex + 1;
-    var downIndex = this.state.currentIndex - 1;
-
-    if (index === maxLength) {
-      this.setState({leadingFour: this.state.carouselByFours[0]});
-
-      if (this.state.carouselByFours[downIndex]) {
-        this.setState({laggingFour: this.state.carouselByFours[downIndex]});
-      }
+    if (currentIndex === 0) {
+      this.setState({rightIndex: currentIndex + 1, leftIndex: carouselOfTetras.length - 1});
+      return;
     }
-
-    else if (index === 0) {
-      this.setState({laggingFour: this.state.carouselByFours[maxLength]});
-      if (this.state.carouselByFours[upIndex]) {
-        this.setState({leadingFour: this.state.carouselByFours[upIndex]});
-      }
-    }
-
-    else {
-      if (this.state.carouselByFours[upIndex]) {
-        this.setState({leadingFour: this.state.carouselByFours[upIndex]});
-      }
-      if (this.state.carouselByFours[downIndex]) {
-        this.setState({laggingFour: this.state.carouselByFours[downIndex]});
-      }
-    }
-
+    this.setState({rightIndex: currentIndex + 1, leftIndex: currentIndex - 1});
   }
 
   handleClick = (event) => {
     const { carouselOfTetras, currentIndex } = this.state;
     const { value } = event.target;
-
     if (value === '>') {
       this.setState({animate: 'right'});
       if (currentIndex === carouselOfTetras.length - 1) {
@@ -143,7 +118,6 @@ class App extends React.Component {
         setTimeout(() => this.setState({currentIndex: currentIndex + 1, animate: ''}), 200);
       }
     }
-
     if (value === '<') {
       this.setState({animate: 'left'});
       if (currentIndex === 0) {
@@ -152,8 +126,7 @@ class App extends React.Component {
         setTimeout(() => this.setState({currentIndex: currentIndex - 1, animate: ''}), 200);
       }
     }
-
-    this.determineStateIndexes(currentIndex);
+    this.determineStateIndexes();
   }
 
   render = () => {
