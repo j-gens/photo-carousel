@@ -7,17 +7,17 @@ if (mongo == null || mongo == "") {
   mongo = 'mongodb://localhost/carousel';
 }
 
-mongoose.connect(mongo);
+mongoose.connect(mongo, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-let carouselSchema = new mongoose.Schema({
+const carouselSchema = new mongoose.Schema({
   _id: Number,
   small_url: String,
   large_url: String,
   movie: {id: Number, title: String}
 });
 
-let Carousel = mongoose.model('Carousel', carouselSchema);
+const Carousel = mongoose.model('Carousel', carouselSchema);
 
 
 const save = (data, callback) => {
@@ -27,34 +27,21 @@ const save = (data, callback) => {
       small_url: data[i].small_url,
       large_url: data[i].large_url,
       movie: {id: data[i].movie.id, title: data[i].movie.title}
-    })
-    newImg.save((err, data) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(data);
-      }
     });
+    newImg.save((err, data) => callback(err, data));
   }
 };
 
 const getCarousel = (movieTitle, path, callback) => {
-  var imageSize = undefined;
+  let imageSize = undefined;
 
-  path = path.slice(0, 14);
   if (path === '/api/imglarge/') {
     imageSize = 'large_url'
   } else if (path === '/api/imgsmall/') {
     imageSize = 'small_url'
   }
 
-  Carousel.find({'movie.title': movieTitle}, `${imageSize} movie`, (err, results) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, results);
-    }
-  });
+  Carousel.find({'movie.title': movieTitle}, `${imageSize} movie`, (err, results) => callback(err, results));
 }
 
 
