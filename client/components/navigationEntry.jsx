@@ -2,16 +2,16 @@ import React from 'react';
 import { CarouselNavDot, CarouselNavDotRed } from './stylesheet.jsx';
 
 
-const NavigationEntry = (props) => {
-  if (props.index === props.idx) {
+const NavigationEntry = ({ index, idx }) => {
+  if (index === idx) {
     return (
       <CarouselNavDotRed></CarouselNavDotRed>
     );
-  } else {
-    return (
-      <CarouselNavDot></CarouselNavDot>
-    );
   }
+
+  return (
+    <CarouselNavDot></CarouselNavDot>
+  );
 }
 
 
