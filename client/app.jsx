@@ -49,10 +49,7 @@ class App extends React.Component {
   isResEmpty = () => {
     const { carousel } = this.state;
     if (carousel.length > 0) {
-      this.setState({
-        noMovies: false,
-        currentMovie: carousel[0].movie.title
-        }, () => this.groupCarouselByFours());
+      this.setState({currentMovie: carousel[0].movie.title}, () => this.groupCarouselByFours());
     }
   }
 
@@ -60,8 +57,8 @@ class App extends React.Component {
     const { carousel } = this.state;
     let selectedTetra = [];
     let allTetras = [];
-    let leftIndex: 0;
-    let rightIndex: 0;
+    let leftI = 0;
+    let rightI = 0;
     const genericImage = {
       _id: "placeholder",
       small_url: "https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/ph-thumb.gif"
@@ -72,7 +69,7 @@ class App extends React.Component {
         selectedTetra.push(genericImage);
       }
       allTetras.push(selectedTetra);
-      this.setState({carouselOfTetras: allTetras});
+      this.setState({noMovies: false, carouselOfTetras: allTetras});
       return;
     }
     for (let i = 0; i < carousel.length; i = i + 4) {
@@ -83,13 +80,14 @@ class App extends React.Component {
       allTetras.push(selectedTetra);
     }
     if (allTetras.length > 1) {
-      leftIndex: allTetras.length - 1;
-      rightIndex: 1;
+      leftI = allTetras.length - 1;
+      rightI = 1;
     }
     this.setState({
+      noMovies: false,
       carouselOfTetras: allTetras,
-      leftIndex: leftIndex,
-      rightIndex: rightIndex,
+      leftIndex: leftI,
+      rightIndex: rightI,
     });
   }
 
@@ -130,7 +128,12 @@ class App extends React.Component {
   }
 
   render = () => {
-    const { noMovies, currentMovie, carousel, carouselofTetras, animate, currentIndex, leftIndex, rightIndex } = this.state;
+    const { noMovies, currentMovie, carousel, carouselOfTetras, animate, currentIndex, leftIndex, rightIndex } = this.state;
+    const lagger = carouselOfTetras[leftIndex];
+    const leader = carouselOfTetras[rightIndex];
+    const current = carouselOfTetras[currentIndex];
+
+    console.log('left ', leftIndex, 'right ', rightIndex, 'current ', currentIndex);
 
     if (noMovies) {
       return (
@@ -158,16 +161,16 @@ class App extends React.Component {
               <em>{currentMovie.toUpperCase()}</em> PHOTOS
             </CarouselHeaderRed>
             <CarouselNavbarBin>
-              <Navigation total={carouselByFours} index={currentIndex} />
+              <Navigation total={carouselOfTetras} index={currentIndex} />
             </CarouselNavbarBin>
           </CarouselHeaderWrapper>
           <CarouselBinWrapper>
             <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
-            <Carousel carousel={carouselOfTetras[currentIndex]}
+            <Carousel carousel={current}
             length={carousel.length}
             animate={animate}
-            leader={carouselOfTetras[rightIndex]}
-            lagger={carouselOfTetras[leftIndex]} />
+            leader={leader}
+            lagger={lagger} />
             <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
           </CarouselBinWrapper>
           <CarouselViewAllWrapper>
