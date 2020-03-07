@@ -92,14 +92,14 @@ class App extends React.Component {
   }
 
   determineStateIndexes = () => {
-    const { carouselOfTetras, currentIndex, leftIndex, rightIndex } = this.state;
+    const { carouselOfTetras, currentIndex } = this.state;
     if (carouselOfTetras.length === 1) return;
     if (currentIndex === carouselOfTetras.length - 1) {
       this.setState({rightIndex: 0, leftIndex: currentIndex - 1});
       return;
     }
     if (currentIndex === 0) {
-      this.setState({rightIndex: currentIndex + 1, leftIndex: carouselOfTetras.length - 1});
+      this.setState({rightIndex: 1, leftIndex: carouselOfTetras.length - 1});
       return;
     }
     this.setState({rightIndex: currentIndex + 1, leftIndex: currentIndex - 1});
@@ -111,30 +111,23 @@ class App extends React.Component {
     if (value === '>') {
       this.setState({animate: 'right'});
       if (currentIndex === carouselOfTetras.length - 1) {
-        setTimeout(() => this.setState({currentIndex: 0, animate: ''}), 200)
+        setTimeout(() => this.setState({currentIndex: 0, animate: ''}, () => this.determineStateIndexes()), 200)
       } else {
-        setTimeout(() => this.setState({currentIndex: currentIndex + 1, animate: ''}), 200);
+        setTimeout(() => this.setState({currentIndex: currentIndex + 1, animate: ''}, () => this.determineStateIndexes()), 200);
       }
     }
     if (value === '<') {
       this.setState({animate: 'left'});
       if (currentIndex === 0) {
-        setTimeout(() => this.setState({currentIndex: carouselOfTetras.length - 1, animate: ''}), 200);
+        setTimeout(() => this.setState({currentIndex: carouselOfTetras.length - 1, animate: ''}, () => this.determineStateIndexes()), 200);
       } else {
-        setTimeout(() => this.setState({currentIndex: currentIndex - 1, animate: ''}), 200);
+        setTimeout(() => this.setState({currentIndex: currentIndex - 1, animate: ''}, () => this.determineStateIndexes()), 200);
       }
     }
-    this.determineStateIndexes();
   }
 
   render = () => {
     const { noMovies, currentMovie, carousel, carouselOfTetras, animate, currentIndex, leftIndex, rightIndex } = this.state;
-    const lagger = carouselOfTetras[leftIndex];
-    const leader = carouselOfTetras[rightIndex];
-    const current = carouselOfTetras[currentIndex];
-
-    console.log('left ', leftIndex, 'right ', rightIndex, 'current ', currentIndex);
-
     if (noMovies) {
       return (
         <PlayNiceWrapper>
@@ -152,7 +145,6 @@ class App extends React.Component {
         </PlayNiceWrapper>
       );
     }
-
     return (
       <PlayNiceWrapper>
         <CarouselBodyWrapper>
@@ -166,11 +158,11 @@ class App extends React.Component {
           </CarouselHeaderWrapper>
           <CarouselBinWrapper>
             <CarouselButtonLeft value="<" onClick={this.handleClick}> {'<'} </CarouselButtonLeft>
-            <Carousel carousel={current}
+            <Carousel carousel={carouselOfTetras[currentIndex]}
             length={carousel.length}
             animate={animate}
-            leader={leader}
-            lagger={lagger} />
+            leader={carouselOfTetras[rightIndex]}
+            lagger={carouselOfTetras[leftIndex]} />
             <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
           </CarouselBinWrapper>
           <CarouselViewAllWrapper>
