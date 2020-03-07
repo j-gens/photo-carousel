@@ -2,8 +2,8 @@ import React from 'react';
 import CarouselEntry from './carouselEntry.jsx';
 import { CarouselLineWrapper } from './stylesheet.jsx';
 
-const Carousel = ({ lagger, carousel, leader, ...otherProps }) => (
 
+const Carousel = ({ lagger, carousel, leader, ...otherProps }) => (
   <CarouselLineWrapper>
     {lagger.map((lagger) =>
       <CarouselEntry entry={lagger} key={lagger._id} {...otherProps} />
@@ -15,6 +15,7 @@ const Carousel = ({ lagger, carousel, leader, ...otherProps }) => (
       <CarouselEntry entry={leader} key={leader._id} {...otherProps} />
     )}
   </CarouselLineWrapper>
-)
+);
+
 
 export default Carousel;
