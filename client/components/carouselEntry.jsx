@@ -4,9 +4,15 @@ import axios from 'axios';
 import { CarouselEntryWrapper, CarouselEntryImg, ModalButtonRight, ModalButtonLeft, ModalBin, ModalImage, Modal, ModalHeader, ModalXButton, ModalCount, CarouselMoveRight, CarouselMoveLeft, ModalImageBin } from './stylesheet.jsx';
 
 
-//for deployment -- also will need to update in ../app.jsx
-const port = 3100;
-const host = 'http://localhost';
+let port = process.env.PORT;
+if (port == null || port == '') {
+  port = 3100;
+}
+
+let host = process.env.HOST;
+if (host == null || host == '') {
+  host = 'http://localhost';
+}
 
 
 class CarouselEntry extends React.Component {
@@ -22,16 +28,14 @@ class CarouselEntry extends React.Component {
   }
 
   handleClick = () => {
-    const { entry: { _id, movie: { title } } } = this.props;
-    this.setState({clickedPhoto: _id});
-
+    const { _id, movie: { title } } = this.props.entry;
     axios.get(`${host}:${port}/api/imglarge/?movietitle=${title}`)
     .then(response => {
-      this.setState({largeCarousel: response.data})
+      this.setState({largeCarousel: response.data,
+        clickedPhoto: _id})
     })
     .finally(() => {
       this.findThePhoto();
-      this.toggleModal();
     })
     .catch(error => {
       console.log(error);
@@ -42,9 +46,11 @@ class CarouselEntry extends React.Component {
     const { largeCarousel, clickedPhoto } = this.state;
     for (let i = 0; i < largeCarousel.length; i++) {
       if (largeCarousel[i]._id === clickedPhoto) {
-        this.setState({currentPhoto: largeCarousel[i].large_url, currentIndex: i});
+        this.setState({currentPhoto: largeCarousel[i].large_url,
+          currentIndex: i});
       }
     }
+    this.toggleModal();
   }
 
   toggleModal = () => {
@@ -53,25 +59,28 @@ class CarouselEntry extends React.Component {
   }
 
   modalClick = (event) => {
-    var maxLength = this.state.largeCarousel.length - 1;
-    var upIndex = this.state.currentIndex + 1;
-    var downIndex = this.state.currentIndex - 1;
+    const { largeCarousel, currentIndex } = this.state;
+    const { value } = event.target;
 
-    if (event.target.value === '>') {
-      if (this.state.currentIndex === maxLength) {
-        this.setState({currentPhoto: this.state.largeCarousel[0].large_url,
+    const maxLength = largeCarousel.length - 1;
+    const upIndex = currentIndex + 1;
+    const downIndex = currentIndex - 1;
+
+    if (value === '>') {
+      if (currentIndex === maxLength) {
+        this.setState({currentPhoto: largeCarousel[0].large_url,
           currentIndex: 0})
       } else {
-        this.setState({currentPhoto: this.state.largeCarousel[upIndex].large_url,
+        this.setState({currentPhoto: largeCarousel[upIndex].large_url,
           currentIndex: upIndex})
       }
     }
-    if (event.target.value === '<') {
-      if (this.state.currentIndex === 0) {
-        this.setState({currentPhoto: this.state.largeCarousel[maxLength].large_url,
+    if (value === '<') {
+      if (currentIndex === 0) {
+        this.setState({currentPhoto: largeCarousel[maxLength].large_url,
           currentIndex: maxLength})
       } else {
-        this.setState({currentPhoto: this.state.largeCarousel[downIndex].large_url,
+        this.setState({currentPhoto: largeCarousel[downIndex].large_url,
           currentIndex: downIndex})
       }
     }
