@@ -83,7 +83,8 @@ class CarouselEntry extends React.Component {
 
     if (modalIsOpen) {
       return ReactDOM.createPortal(
-        ( <>
+        (
+          <>
             <Modal>
                 <ModalHeader>
                   <ModalCount>{currentIndex + 1} of {length}</ModalCount>
@@ -98,32 +99,31 @@ class CarouselEntry extends React.Component {
           </>
         ), document.getElementById('imgmodal'));
     }
+
     if (animate === 'right') {
       return (
         <CarouselMoveRight>
-          <CarouselEntryImg src={small_url}
-          alt={_id} >
-          </CarouselEntryImg>
+          <CarouselEntryImg src={small_url} alt={_id} />
         </CarouselMoveRight>
       );
-    } else if (animate === 'left') {
+    }
+
+    if (animate === 'left') {
       return (
         <CarouselMoveLeft>
-          <CarouselEntryImg src={small_url}
-          alt={_id} >
-          </CarouselEntryImg>
+          <CarouselEntryImg src={small_url} alt={_id} />
         </CarouselMoveLeft>
       );
-    } else {
-      return (
-        <CarouselEntryWrapper>
-          <CarouselEntryImg src={small_url}
-          alt={_id} onClick={this.handleClick}>
-          </CarouselEntryImg>
-        </CarouselEntryWrapper>
-      );
     }
+
+    return (
+      <CarouselEntryWrapper>
+        <CarouselEntryImg src={small_url} alt={_id} onClick={this.handleClick} />
+      </CarouselEntryWrapper>
+    );
+
   }
 }
+
 
 export default CarouselEntry;
