@@ -19,19 +19,14 @@ class CarouselEntry extends React.Component {
       currentIndex: 0,
       largeCarousel: []
     }
-
-    this.handleClick = this.handleClick.bind(this);
-    this.findThePhoto = this.findThePhoto.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.modalClick = this.modalClick.bind(this);
   }
 
-  handleClick() {
-    this.setState({clickedPhoto: this.props.entry._id});
+  handleClick = () => {
+    const { entry: { _id, movie: { title } } } = this.props;
+    this.setState({clickedPhoto: _id});
 
-    axios.get(`${host}:${port}/api/imglarge/?movietitle=${this.props.entry.movie.title}`)
+    axios.get(`${host}:${port}/api/imglarge/?movietitle=${title}`)
     .then(response => {
-      console.log(response);
       this.setState({largeCarousel: response.data})
     })
     .finally(() => {
@@ -43,19 +38,21 @@ class CarouselEntry extends React.Component {
     })
   }
 
-  findThePhoto() {
-    for (let i = 0; i < this.state.largeCarousel.length; i++) {
-      if (this.state.largeCarousel[i]._id === this.state.clickedPhoto) {
-        this.setState({currentPhoto: this.state.largeCarousel[i].large_url, currentIndex: i});
+  findThePhoto = () => {
+    const { largeCarousel, clickedPhoto } = this.state;
+    for (let i = 0; i < largeCarousel.length; i++) {
+      if (largeCarousel[i]._id === clickedPhoto) {
+        this.setState({currentPhoto: largeCarousel[i].large_url, currentIndex: i});
       }
     }
   }
 
-  toggleModal() {
-    this.setState({modalIsOpen: !this.state.modalIsOpen});
+  toggleModal = () => {
+    const { modalIsOpen } = this.state;
+    this.setState({modalIsOpen: !modalIsOpen});
   }
 
-  modalClick(event) {
+  modalClick = (event) => {
     var maxLength = this.state.largeCarousel.length - 1;
     var upIndex = this.state.currentIndex + 1;
     var downIndex = this.state.currentIndex - 1;
@@ -81,44 +78,47 @@ class CarouselEntry extends React.Component {
   }
 
   render() {
-    if (this.state.modalIsOpen) {
+    const { modalIsOpen, currentIndex, currentPhoto } = this.state;
+    const { length, animate, entry: { _id, small_url } }  = this.props;
+
+    if (modalIsOpen) {
       return ReactDOM.createPortal(
         ( <>
             <Modal>
                 <ModalHeader>
-                  <ModalCount>{this.state.currentIndex + 1} of {this.props.length}</ModalCount>
+                  <ModalCount>{currentIndex + 1} of {length}</ModalCount>
                   <ModalXButton onClick={this.toggleModal}> X </ModalXButton>
                 </ModalHeader>
                 <ModalBin>
                   <ModalButtonLeft value="<" onClick={this.modalClick}>{'<'}</ModalButtonLeft>
-                    <ModalImage src={this.state.currentPhoto}></ModalImage>
+                    <ModalImage src={currentPhoto}></ModalImage>
                   <ModalButtonRight value=">" onClick={this.modalClick}>{'>'}</ModalButtonRight>
                 </ModalBin>
             </Modal>
           </>
         ), document.getElementById('imgmodal'));
     }
-    if (this.props.animate === 'right') {
+    if (animate === 'right') {
       return (
         <CarouselMoveRight>
-          <CarouselEntryImg src={this.props.entry.small_url}
-          alt={this.props.entry._id} >
+          <CarouselEntryImg src={small_url}
+          alt={_id} >
           </CarouselEntryImg>
         </CarouselMoveRight>
       );
-    } else if (this.props.animate === 'left') {
+    } else if (animate === 'left') {
       return (
         <CarouselMoveLeft>
-          <CarouselEntryImg src={this.props.entry.small_url}
-          alt={this.props.entry._id} >
+          <CarouselEntryImg src={small_url}
+          alt={_id} >
           </CarouselEntryImg>
         </CarouselMoveLeft>
       );
     } else {
       return (
         <CarouselEntryWrapper>
-          <CarouselEntryImg src={this.props.entry.small_url}
-          alt={this.props.entry._id} onClick={this.handleClick}>
+          <CarouselEntryImg src={small_url}
+          alt={_id} onClick={this.handleClick}>
           </CarouselEntryImg>
         </CarouselEntryWrapper>
       );
