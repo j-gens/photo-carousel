@@ -2,16 +2,17 @@ import React from 'react';
 import CarouselEntry from './carouselEntry.jsx';
 import { CarouselLineWrapper } from './stylesheet.jsx';
 
-const Carousel = (props) => (
+const Carousel = ({ lagger, carousel, leader, ...otherProps }) => (
+
   <CarouselLineWrapper>
-    {props.lagger.map((lagger) =>
-      <CarouselEntry entry={lagger} key={lagger._id} animate={props.animate} />
+    {lagger.map((lagger) =>
+      <CarouselEntry entry={lagger} key={lagger._id} {...otherProps} />
     )}
-    {props.carousel.map((entry) =>
-      <CarouselEntry entry={entry} key={entry._id} length={props.length} animate={props.animate} />
+    {carousel.map((entry) =>
+      <CarouselEntry entry={entry} key={entry._id} {...otherProps} />
     )}
-    {props.leader.map((leader) =>
-      <CarouselEntry entry={leader} key={leader._id} animate={props.animate} />
+    {leader.map((leader) =>
+      <CarouselEntry entry={leader} key={leader._id} {...otherProps} />
     )}
   </CarouselLineWrapper>
 )
