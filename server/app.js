@@ -12,8 +12,7 @@ app.use(express.urlencoded({extended: true}))
 
 
 app.get('/api/imgsmall/', (req, res) => {
-  console.log(req.query);
-  db.getCarousel(req.query.movietitle, req.path, (err, data) => {
+  db.getCarousel(req.query.movietitle, req.pathname, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
@@ -24,7 +23,7 @@ app.get('/api/imgsmall/', (req, res) => {
 
 
 app.get('/api/imglarge/', (req, res) => {
-  db.getCarousel(req.query.movietitle, req.path, (err, data) => {
+  db.getCarousel(req.query.movietitle, req.pathname, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
