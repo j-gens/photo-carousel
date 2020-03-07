@@ -5,23 +5,43 @@ import Navigation from './components/navigation.jsx';
 import Carousel from './components/carousel.jsx';
 import { CarouselBodyWrapper, CarouselHeaderWrapper, CarouselHeaderRed, CarouselNavbarBin, CarouselBinWrapper, Button, CarouselButtonLeft, CarouselButtonRight, CarouselViewAllWrapper, CarouselViewAllLink, PlayNiceWrapper, NoMovies } from './components/stylesheet.jsx';
 
-//for deployment -- also will need to update in components/carouselEntry.jsx
-const port = 3100;
-const host = 'http://localhost';
+
+let port = process.env.PORT;
+if (port == null || port == '') {
+  port = 3100;
+}
+
+let host = process.env.HOST;
+if (host == null || host == '') {
+  host = 'http://localhost';
+}
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentMovie: '',
-      carousel: [],
       noMovies: true,
+
+
+      carousel: [],
+
+      animate: '',
+
+      currentIndex: 0,
+
+
       carouselByFours: [],
       currentFour: [],
-      currentIndex: 0,
-      animate: '',
       leadingFour: [],
-      laggingFour: []
+      laggingFour: [],
+
+
+      currentDisplayIndex: {start: 0, end: 3},
+      rightDirectionIndex: {start: 0, end: 3},
+      leftDirectionIndex: {start: 0, end: 3},
+
     }
   }
 
@@ -55,47 +75,74 @@ class App extends React.Component {
     //inner arrays have four images each in them
     //if movie has < 4 images total then add in 'blank' image as placeholder
   groupImagesByFours = () => {
-    const carousel = this.state.carousel;
-    var count = carousel.length;
-    var selectedFour = [];
-    var allGroupsOfFour = [];
+    const { carousel } = this.state;
 
-    var lagFour = [];
-    var leadFour = [];
+    const genericImage = {
+      _id: "placeholder",
+      small_url: "https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/ph-thumb.gif"
+    };
 
-    var genericImage= {"_id": "placeholder",
-      "small_url": "https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/ph-thumb.gif"};
-
-    if (carousel.length < 4) {
-      selectedFour = carousel.slice();
-      while (selectedFour.length < 4) {
-        selectedFour.push(genericImage);
+    if (carousel.length <= 4) {
+      while (carousel.length < 4) {
+        this.setState({
+          carousel: carousel.push(genericImage)
+        });
       }
-      allGroupsOfFour.push(selectedFour);
-    } else {
-      var i = 0;
-      while (i < count) {
-        selectedFour = carousel.slice(i, i + 4);
-        if (selectedFour.length < 4) {
-          selectedFour = carousel.slice(-4);
-        }
-        allGroupsOfFour.push(selectedFour);
-        i = i + 4;
-      }
+
+      return;
     }
 
-    if (allGroupsOfFour.length === 1) {
-      lagFour = allGroupsOfFour[0];
-      leadFour = allGroupsOfFour[0];
-    } else {
-      lagFour = allGroupsOfFour[allGroupsOfFour.length - 1];
-      leadFour = allGroupsOfFour[1];
+    if (carousel.length % 4 !== 0) {
+
+
+
     }
 
-    this.setState({carouselByFours: allGroupsOfFour,
-      currentFour: allGroupsOfFour[0],
-      laggingFour: lagFour,
-      leadingFour: leadFour});
+
+
+
+    // let selectedFour = [];
+    // var allGroupsOfFour = [];
+    // var lagFour = [];
+    // var leadFour = [];
+
+
+    // if (carousel.length <= 4) {
+    //   selectedFour = carousel.slice();
+    //   while (selectedFour.length < 4) {
+    //     selectedFour.push(genericImage);
+    //   }
+
+    //   this.setState({
+    //     carouselByFours: carouselByFours.push(selectedFour),
+    //     currentFour: selectedFour,
+    //     leadingFour: selectedFour,
+    //     laggingFour: selectedFour
+    //   });
+    // }
+
+    // else {
+    //   let i = 0;
+    //   while (i < carousel.length) {
+    //     selectedFour = carousel.slice(i, i + 4);
+    //     if (selectedFour.length < 4) {
+    //       selectedFour = carousel.slice(-4);
+    //     }
+    //     allGroupsOfFour.push(selectedFour);
+    //     i = i + 4;
+    //   }
+    //   if (allGroupsOfFour.length === 1) {
+    //     lagFour = allGroupsOfFour[0];
+    //     leadFour = allGroupsOfFour[0];
+    //   } else {
+    //     lagFour = allGroupsOfFour[allGroupsOfFour.length - 1];
+    //     leadFour = allGroupsOfFour[1];
+    //   }
+    //   this.setState({carouselByFours: allGroupsOfFour,
+    //     currentFour: allGroupsOfFour[0],
+    //     laggingFour: lagFour,
+    //     leadingFour: leadFour});
+    // }
   }
 
   leadingOrLagging = (index) => {
@@ -126,36 +173,40 @@ class App extends React.Component {
 
   //change currentFour displayed (cycle through carousel)
   handleClick = (event) => {
-    var maxLength = this.state.carouselByFours.length - 1;
-    var upIndex = this.state.currentIndex + 1;
-    var downIndex = this.state.currentIndex - 1;
+    const { carouselByFours, currentIndex } = this.state;
+    const { value } = event.target;
+    // var maxLength = this.state.carouselByFours.length - 1;
+    // var upIndex = this.state.currentIndex + 1;
+    // var downIndex = this.state.currentIndex - 1;
 
-    if (event.target.value === '>') {
-      if (this.state.currentIndex === maxLength) {
+    if (value === '>') {
+      if (currentIndex === carouselByFours.length - 1) {
         this.setState({animate: 'right'});
-        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[0],
+        setTimeout(() => {this.setState({currentFour: carouselByFours[0],
           currentIndex: 0, animate: ''})}, 200)
       } else {
         this.setState({animate: 'right'});
-        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[upIndex],
+        setTimeout(() => {this.setState({currentFour: carouselByFours[upIndex],
           currentIndex: upIndex, animate: ''})}, 200);
       }
     }
-    if (event.target.value === '<') {
-      if (this.state.currentIndex === 0) {
+    if (value === '<') {
+      if (currentIndex === 0) {
         this.setState({animate: 'left'});
-        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[maxLength],
+        setTimeout(() => {this.setState({currentFour: carouselByFours[maxLength],
           currentIndex: maxLength, animate: ''})}, 200);
       } else {
         this.setState({animate: 'left'});
-        setTimeout(() => {this.setState({currentFour: this.state.carouselByFours[downIndex], currentIndex: downIndex, animate: ''})}, 200);
+        setTimeout(() => {this.setState({currentFour: carouselByFours[downIndex], currentIndex: downIndex, animate: ''})}, 200);
       }
     }
-    this.leadingOrLagging(this.state.currentIndex);
+    this.leadingOrLagging(currentIndex);
   }
 
   render = () => {
-    if (this.state.noMovies) {
+    const { noMovies, currentMovie, carousel, carouselByFours } = this.state;
+
+    if (noMovies) {
       return (
         <PlayNiceWrapper>
           <NoMovies>
@@ -170,7 +221,7 @@ class App extends React.Component {
             </p>
           </NoMovies>
         </PlayNiceWrapper>
-      )
+      );
     }
 
     return (
@@ -178,10 +229,10 @@ class App extends React.Component {
         <CarouselBodyWrapper>
           <CarouselHeaderWrapper>
             <CarouselHeaderRed>
-              <em>{this.state.currentMovie.toUpperCase()}</em> PHOTOS
+              <em>{currentMovie.toUpperCase()}</em> PHOTOS
             </CarouselHeaderRed>
             <CarouselNavbarBin>
-              <Navigation total={this.state.carouselByFours} index={this.state.currentIndex} />
+              <Navigation total={carouselByFours} index={this.state.currentIndex} />
             </CarouselNavbarBin>
           </CarouselHeaderWrapper>
           <CarouselBinWrapper>
@@ -194,7 +245,8 @@ class App extends React.Component {
             <CarouselButtonRight value=">" onClick={this.handleClick}> {'>'} </CarouselButtonRight>
           </CarouselBinWrapper>
           <CarouselViewAllWrapper>
-            <CarouselViewAllLink>Total Photos ({this.state.carousel.length})
+            <CarouselViewAllLink>
+              Total Photos ({carousel.length})
             </CarouselViewAllLink>
           </CarouselViewAllWrapper>
         </CarouselBodyWrapper>
