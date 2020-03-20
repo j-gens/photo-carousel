@@ -4,15 +4,17 @@ This photo carousel module was designed and written for a review-aggregation app
 
 ## Getting Started
 
-### Technologies Used:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-React, styled-components, Node/Express, MongoDB/Mongoose, Webpack, Babel, Jest, Enzyme, Supertest, AWS (EC2, S3)
+### Built With
+
+JavaScript, React, styled-components, Node/Express, MongoDB/Mongoose, Webpack, Babel, Jest, Enzyme, SuperTest, AWS (EC2, S3)
 
 ### Installing
 
 1. Clone the repository onto your local machine
 ```
-$ git clone [https://github.com/j-gens/photo-carousel.git](https://github.com/j-gens/photo-carousel.git)
+$ git clone https://github.com/j-gens/photo-carousel.git
 ```
 2. Change directories into the photo-carousel root directory
 ```
@@ -34,7 +36,7 @@ npm run-script build
 ```
 npm start
 ```
-7. In browser go to [http://localhost:4000](http://localhost:4000)
+7. View in browser by going to [http://localhost:4000](http://localhost:4000)
 
 
 
