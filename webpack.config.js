@@ -14,5 +14,4 @@ module.exports = {
       }
     }]
   },
-  watch: true
 }
