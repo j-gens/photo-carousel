@@ -10,18 +10,31 @@ React, styled-components, Node/Express, MongoDB/Mongoose, Webpack, Babel, Jest, 
 
 ### Installing
 
-1. Run `$ git clone [https://github.com/j-gens/photo-carousel.git](https://github.com/j-gens/photo-carousel.git)`
-
-2. cd into photo-carousel root directory
-
-3. Run `npm install` from within the repository root directory to install dependencies in a local node_modules folder
-
-4. Run `npm run-script seed` to seed your database with
-
-5. Run `npm run-script build` to assemble to bundle within the public folder
-
-6. Run `npm start` to run the server on your local machine
-
+1. Clone the repository onto your local machine
+```
+$ git clone [https://github.com/j-gens/photo-carousel.git](https://github.com/j-gens/photo-carousel.git)
+```
+2. Change directories into the photo-carousel root directory
+```
+cd photo-carousel
+```
+3. Install the dependencies in a local node_modules folder
+```
+npm install
+```
+4. Seed your MongoDB database
+```
+npm run-script seed
+```
+5. Assemble the bundle within the public folder
+```
+npm run-script build
+```
+6. Start the server on your local machine
+```
+npm start
+```
+7. In browser go to [http://localhost:4000](http://localhost:4000)
 
 
 
