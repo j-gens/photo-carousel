@@ -33,7 +33,10 @@ This photo carousel module was designed and written for a review-aggregation app
 * MongoDB/Mongoose
 * Webpack
 * Babel
-* Jest, Enzyme, SuperTest, AWS (EC2, S3)
+* Jest
+* Enzyme
+* SuperTest
+* AWS (EC2, S3)
 
 ## Getting Started
 
