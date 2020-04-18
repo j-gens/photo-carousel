@@ -1,4 +1,4 @@
-# Review Aggregation App: Photo Carousel Module
+# Review Aggregation App: Photo Carousel Service
 
 * [Overview](https://github.com/j-gens/photo-carousel#overview)
 * [Technologies](https://github.com/j-gens/photo-carousel#technologies)
@@ -7,7 +7,7 @@
 
 ## Overview
 
-This photo carousel module was designed and written for a review-aggregation app for visual media.
+This photo carousel servicewas designed and written for a review-aggregation app for visual media.
 
 #### Team Members
 
@@ -19,7 +19,7 @@ This photo carousel module was designed and written for a review-aggregation app
 
 #### My Contribution
 
-* Designed and built media carousel module
+* Designed and built media carousel service
 * Resolved team integration conflicts via Webpack optimization
 * Coordinated and deployed entire team’s modules on proxy server EC2 instance
 * Utilized agile workflow practices on a 5-person remote team
@@ -41,7 +41,6 @@ This photo carousel module was designed and written for a review-aggregation app
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
 
 #### Installing
 
