@@ -5,6 +5,8 @@
 * [Getting Started](https://github.com/j-gens/photo-carousel#getting-started)
 * [License](https://github.com/j-gens/photo-carousel#license)
 
+![alt hollywood sign](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-gen.jpg)
+
 ## Overview
 
 This photo carousel servicewas designed and written for a review-aggregation app for visual media.
