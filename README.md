@@ -9,7 +9,7 @@
 
 ## Overview
 
-This photo carousel servicewas designed and written for a review-aggregation app for visual media.
+This photo carousel service was designed and written for a review-aggregation app for visual media.
 
 #### Team Members
 
