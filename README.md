@@ -1,9 +1,10 @@
-# Review Aggregation App: Photo Carousel Service
+#  reVIEW
+## Review Aggregation App: Photo Carousel Service
 
-* [Overview](https://github.com/j-gens/photo-carousel#overview)
-* [Technologies](https://github.com/j-gens/photo-carousel#technologies)
-* [Getting Started](https://github.com/j-gens/photo-carousel#getting-started)
-* [License](https://github.com/j-gens/photo-carousel#license)
+* [Overview](https://github.com/j-gens/review-aggregation-app#overview)
+* [Technologies](https://github.com/j-gens/review-aggregation-app#technologies)
+* [Getting Started](https://github.com/j-gens/review-aggregation-app#getting-started)
+* [License](https://github.com/j-gens/review-aggregation-app#license)
 
 ![alt hollywood sign](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-gen.jpg)
 
@@ -48,11 +49,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Clone the repository onto your local machine
 ```
-$ git clone https://github.com/j-gens/photo-carousel.git
+$ git clone https://github.com/j-gens/review-aggregation-app.git
 ```
-2. Change directories into the photo-carousel root directory
+2. Change directories into the review-aggregation-app root directory
 ```
-cd photo-carousel
+cd review-aggregation-app
 ```
 3. Install the dependencies in a local node_modules folder
 ```
@@ -74,4 +75,4 @@ npm start
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/j-gens/photo-carousel/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/j-gens/review-aggregation-app/blob/master/LICENSE) file for details
