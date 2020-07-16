@@ -4,7 +4,8 @@
   "description": "Display your thumbnails in a photo carousel!",
   "main": "server/index.js",
   "scripts": {
-    "test": "jest spec --detectOpenHandles",
+    "test:client": "jest spec/client --detectOpenHandles --coverage --config=client.config.js",
+    "test:server": "jest spec/server --detectOpenHandles --coverage --config=server.config.js",
     "start:dev": "nodemon server/index.js",
     "build:dev": "webpack --watch",
     "seed": "node database/seed.js",
@@ -14,7 +15,6 @@
   "author": "j-gens",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.6.3",
     "@babel/core": "^7.6.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.6.3",
