@@ -4,22 +4,24 @@ import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 
 import axios from 'axios';
-import App from '../client/app.jsx';
+import App from '../../client/app.jsx';
 
 configure({adapter: new Adapter()})
 
 jest.mock('axios');
 
-describe('App component', () => {
-
+describe('App component: basic functionality', () => {
   it('renders without crashing given the required props', () => {
     const props = {
-      currentMovie: '',
+      noMovies: true,
       carousel: [],
-      carouselByFours: [],
-      currentFour: [],
-      currentIndex: 0
-    }
+      currentMovie: '',
+      animate: '',
+      carouselOfTetras: [],
+      currentIndex: 0,
+      leftIndex: 0,
+      rightIndex: 0,
+    };
     const images = [{_id: 1, small_url: 'https://hrr41-fec-krillin-imgs.s3-us-west-1.amazonaws.com/small0.jpg', movie: {id: 21210, title: 'Detective Pikachu'}}];
     const resp = {data: images};
     axios.get.mockResolvedValue(resp);
@@ -61,7 +63,12 @@ describe('App component', () => {
     wrapper.find('stylesheet__CarouselButtonLeft').simulate('click');
     expect(mockOnClick.mock.calls.length).toEqual(1);
   })
-
 })
+
+// describe('App component: methods', () => {
+//   it('', () => {
+
+//   })
+// })
 
 
