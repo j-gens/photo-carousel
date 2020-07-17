@@ -10,10 +10,19 @@ configure({adapter: new Adapter()})
 
 
 describe('NavigationEntry component', () => {
-  it('renders without crashing given the required props', () => {
+  it('renders red state without crashing given the required props', () => {
     const props = {
       index: 0,
       idx: 0,
+    };
+    const wrapper = shallow(<NavigationEntry {...props} />)
+    expect(toJson(wrapper)).toMatchSnapshot()
+  })
+
+  it('renders gray state without crashing given the required props', () => {
+    const props = {
+      index: 0,
+      idx: 2,
     };
     const wrapper = shallow(<NavigationEntry {...props} />)
     expect(toJson(wrapper)).toMatchSnapshot()
