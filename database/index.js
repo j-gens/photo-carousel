@@ -40,7 +40,6 @@ const getCarousel = (movieTitle, path, callback) => {
   } else if (path === '/api/imgsmall/') {
     imageSize = 'small_url'
   }
-
   Carousel.find({'movie.title': movieTitle}, `${imageSize} movie`, (err, results) => callback(err, results));
 }
 
