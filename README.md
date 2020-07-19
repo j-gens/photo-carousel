@@ -24,6 +24,7 @@ This photo carousel service was designed and written for a review-aggregation ap
 
 * Designed and built media carousel service
 * Resolved team integration conflicts via Webpack optimization
+* Implemented test coverage over 80%
 * Coordinated and deployed entire team’s modules on proxy server EC2 instance
 * Utilized agile workflow practices on a 5-person remote team
 
@@ -72,6 +73,19 @@ npm run-script build
 npm start
 ```
 7. View in browser by going to [http://localhost:3100](http://localhost:3100)
+
+#### Testing
+
+Tests have been split into two categories: front-end and back-end.  Both categories of tests use Jest as the test runner, mocking, and assertion library.
+
+Front-end tests have also been written with Enzyme for additional testing utility.  The first time you run the front-end tests, Jest will create snapshots and corresponding folder within **/spec/client/** for you.  Run the front-end tests with the following command:
+```
+npm run-script test:client
+```
+Back-end tests have also been written with SuperTest for endpoint testing.  Run the back-end tests with the following command:
+```
+npm run-script test:server
+```
 
 ## License
 
