@@ -43,25 +43,10 @@ describe('CarouselEntry component', () => {
     const wrapper = shallow(<CarouselEntry {...props} />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
-  })
+  });
+});
 
-  it('opens modal when user clicks on component', () => {
-    const props = {
-      entry: {_id: 23, small_url: '/images/small0.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
-      length: 12,
-      animate: '',
-    };
-    const wrapper = mount(<CarouselEntry {...props} />);
-    const spy = jest.spyOn(wrapper.instance(), 'handleClick').mockImplementation(() => {});
-
-    wrapper.setProps({});
-    wrapper.find('img').simulate('click');
-
-    expect(spy).toHaveBeenCalled();
-  })
-})
-
-describe('Modal behavior', () => {
+describe('CarouselEntry component: Modal behavior', () => {
   const modalRoot = global.document.createElement('div');
   modalRoot.setAttribute('id', 'imgmodal');
   global.document.querySelector('body').appendChild(modalRoot);
@@ -93,7 +78,7 @@ describe('Modal behavior', () => {
     wrapper.find('img').simulate('click');
 
     expect(spy).toHaveBeenCalled();
-  })
+  });
 
   it('the modal toggles right and left when clicked', () => {
     const spy = jest.spyOn(wrapper.instance(), 'modalClick');
@@ -108,6 +93,15 @@ describe('Modal behavior', () => {
       expect(spy).toHaveBeenCalledTimes(2);
     });
   });
+
+  it('closes the modal when the X button is clicked', () => {
+    const spy = jest.spyOn(wrapper.instance(), 'toggleModal');
+
+    wrapper.setProps({});
+    wrapper.find('stylesheet__ModalXButton').simulate('click');
+
+    expect(spy).toHaveBeenCalled();
+  })
 });
 
 describe('Carousel component', () => {
@@ -134,8 +128,9 @@ describe('Carousel component', () => {
         {_id: 12, small_url: '/images/small3.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
       ],
     };
-    const wrapper = shallow(<Carousel {...props} />)
-    expect(toJson(wrapper)).toMatchSnapshot()
+
+    const wrapper = shallow(<Carousel {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
-})
+});
 
