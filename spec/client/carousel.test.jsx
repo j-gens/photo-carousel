@@ -18,8 +18,8 @@ describe('CarouselEntry component', () => {
       length: 12,
       animate: '',
     };
-
     const wrapper = shallow(<CarouselEntry {...props} />);
+
     expect(toJson(wrapper)).toMatchSnapshot();
   })
 
@@ -29,8 +29,8 @@ describe('CarouselEntry component', () => {
       length: 12,
       animate: 'left',
     };
-
     const wrapper = shallow(<CarouselEntry {...props} />);
+
     expect(toJson(wrapper)).toMatchSnapshot();
   })
 
@@ -40,8 +40,8 @@ describe('CarouselEntry component', () => {
       length: 12,
       animate: 'right',
     };
-
     const wrapper = shallow(<CarouselEntry {...props} />);
+
     expect(toJson(wrapper)).toMatchSnapshot();
   })
 
@@ -52,35 +52,63 @@ describe('CarouselEntry component', () => {
       animate: '',
     };
     const wrapper = mount(<CarouselEntry {...props} />);
-    const spy = jest.spyOn(wrapper.instance(), 'handleClick').mockImplementation(() => console.log('clicked!!!'));
+    const spy = jest.spyOn(wrapper.instance(), 'handleClick').mockImplementation(() => {});
 
     wrapper.setProps({});
-
-    const thumbnail = wrapper.find('img');
-    thumbnail.simulate('click');
+    wrapper.find('img').simulate('click');
 
     expect(spy).toHaveBeenCalled();
   })
 })
 
 describe('Modal behavior', () => {
-  it('simulates left button click', () => {
-    const mockOnClick = jest.fn();
-    const wrapper = shallow(<stylesheet__ModalButtonLeft value="<" onClick={mockOnClick}> &gt; </stylesheet__ModalButtonLeft>);
+  const modalRoot = global.document.createElement('div');
+  modalRoot.setAttribute('id', 'imgmodal');
+  global.document.querySelector('body').appendChild(modalRoot);
 
-    wrapper.find('stylesheet__ModalButtonLeft').simulate('click');
-    expect(mockOnClick.mock.calls.length).toEqual(1);
+  const props = {
+    entry: {_id: 1, small_url: '/images/small0.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
+    length: 4,
+    animate: '',
+  };
+  const testState = {
+    modalIsOpen: true,
+    clickedPhoto: '/images/large0.jpg',
+    currentPhoto: '/images/large0.jpg',
+    currentIndex: 0,
+    largeCarousel:[
+      {_id: 1, large_url: '/images/large0.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
+      {_id: 2, large_url: '/images/large1.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
+      {_id: 3, large_url: '/images/large2.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
+      {_id: 4, large_url: '/images/large3.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
+    ],
+  };
+
+  const wrapper = mount(<CarouselEntry {...props} />);
+
+  it('opens modal when user clicks on component', () => {
+    const spy = jest.spyOn(wrapper.instance(), 'handleClick').mockImplementation(() => {});
+
+    wrapper.setProps({});
+    wrapper.find('img').simulate('click');
+
+    expect(spy).toHaveBeenCalled();
   })
 
-  it('simulates right button click', () => {
-    const mockOnClick = jest.fn();
-    const wrapper = shallow(<stylesheet__ModalButtonRight value=">" onClick={mockOnClick}> &gt; </stylesheet__ModalButtonRight>);
+  it('the modal toggles right and left when clicked', () => {
+    const spy = jest.spyOn(wrapper.instance(), 'modalClick');
 
-    wrapper.find('stylesheet__ModalButtonRight').simulate('click');
-    expect(mockOnClick.mock.calls.length).toEqual(1);
-  })
-})
+    wrapper.setState(testState, () => {
+      wrapper.update();
 
+      wrapper.find('stylesheet__ModalButtonLeft').simulate('click');
+      expect(spy).toHaveBeenCalledTimes(1);
+
+      wrapper.find('stylesheet__ModalButtonRight').simulate('click');
+      expect(spy).toHaveBeenCalledTimes(2);
+    });
+  });
+});
 
 describe('Carousel component', () => {
   it('renders without crashing given the required props', () => {

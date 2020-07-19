@@ -40,7 +40,7 @@ describe('App component: basic functionality', () => {
 })
 
 describe('App component: methods', () => {
-  const initialState = {
+  const testState = {
     carousel: [
       {_id: 1, small_url: '/images/small0.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
       {_id: 2, small_url: '/images/small1.jpg', movie: {id: 21210, title: 'Detective Pikachu'}},
@@ -68,7 +68,7 @@ describe('App component: methods', () => {
     const wrapper = mount(<App />);
     const spy = jest.spyOn(wrapper.instance(), 'handleClick')
 
-    wrapper.setState(initialState, () => {
+    wrapper.setState(testState, () => {
       wrapper.update();
       wrapper.find('stylesheet__CarouselButtonRight').simulate('click');
 
@@ -80,7 +80,7 @@ describe('App component: methods', () => {
     const wrapper = mount(<App />);
     const spy = jest.spyOn(wrapper.instance(), 'handleClick')
 
-    wrapper.setState(initialState, () => {
+    wrapper.setState(testState, () => {
       wrapper.update();
       wrapper.find('stylesheet__CarouselButtonLeft').simulate('click');
 
