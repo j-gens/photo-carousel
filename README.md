@@ -4,6 +4,7 @@
 * [Overview](https://github.com/j-gens/review-aggregation-app#overview)
 * [Technologies](https://github.com/j-gens/review-aggregation-app#technologies)
 * [Getting Started](https://github.com/j-gens/review-aggregation-app#getting-started)
+* [Testing](https://github.com/j-gens/review-aggregation-app#testing)
 * [License](https://github.com/j-gens/review-aggregation-app#license)
 
 ![alt hollywood sign](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-gen.jpg)
@@ -54,37 +55,39 @@ $ git clone https://github.com/j-gens/review-aggregation-app.git
 ```
 2. Change directories into the review-aggregation-app root directory
 ```
-cd review-aggregation-app
+$ cd review-aggregation-app
 ```
 3. Install the dependencies in a local node_modules folder
 ```
-npm install
+$ npm install
 ```
 4. Seed your MongoDB database
 ```
-npm run-script seed
+$ npm run-script seed
 ```
 5. Assemble the bundle within the public folder
 ```
-npm run-script build
+$ npm run-script build
 ```
 6. Start the server on your local machine
 ```
-npm start
+$ npm start
 ```
-7. View in browser by going to [http://localhost:3100](http://localhost:3100)
+7. View in browser by going to [http://localhost:3100](http://localhost:3100).  The client side it set up with a default movie title to query the server if none is entered.
 
-#### Testing
+![alt photo carousel](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-preview.png)
+
+## Testing
 
 Tests have been split into two categories: front-end and back-end.  Both categories of tests use Jest as the test runner, mocking, and assertion library.
 
 Front-end tests have also been written with Enzyme for additional testing utility.  The first time you run the front-end tests, Jest will create snapshots and corresponding folder within **/spec/client/** for you.  Run the front-end tests with the following command:
 ```
-npm run-script test:client
+$ npm run-script test:client
 ```
 Back-end tests have also been written with SuperTest for endpoint testing.  Run the back-end tests with the following command:
 ```
-npm run-script test:server
+$ npm run-script test:server
 ```
 
 ## License
