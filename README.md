@@ -73,9 +73,13 @@ $ npm run-script build
 ```
 $ npm start
 ```
-7. View in browser by going to [http://localhost:3100](http://localhost:3100).  The client side it set up with a default movie title to query the server if none is entered.
+View in browser by going to [http://localhost:3100](http://localhost:3100).  The client side it set up with a default movie title to query the server if none is entered.
 
-![alt photo carousel](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-preview.png)
+![alt photo carousel preview](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-preview.png)
+
+Clicking on any of the the thumbnail images will open up the modal and allow for cycling through the full-size images.
+
+![alt modal preview](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-preview2.png)
 
 ## Testing
 
