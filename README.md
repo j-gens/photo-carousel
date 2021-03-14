@@ -7,7 +7,7 @@
 * [Testing](https://github.com/j-gens/review-aggregation-app#testing)
 * [License](https://github.com/j-gens/review-aggregation-app#license)
 
-![alt hollywood sign](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/review-gen.jpg)
+![alt hollywood sign](https://github.com/j-gens/review-aggregation-app/blob/master/review-gen.jpg?raw=true)
 
 ## Overview
 
